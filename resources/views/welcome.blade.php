@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Pandawa Sakti</title>
+        <title>Pandawa </title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -37,7 +37,7 @@
         <!-- Spinner End -->
 
 
-        <!-- Navbar start -->
+        
         <div class="container-fluid fixed-top">
             <div class="container topbar bg-primary d-none d-lg-block">
                 <div class="d-flex justify-content-between">
