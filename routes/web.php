@@ -37,3 +37,6 @@ Route::get('/shop-detail', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+Route::get('/superadmin/dashboard', function () {
+    return view('superadmin.dashboard');
+});
