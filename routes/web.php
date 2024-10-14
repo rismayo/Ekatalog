@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SesiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +42,6 @@ Route::get('/contact', function () {
 Route::get('/superadmin/dashboard', function () {
     return view('superadmin.dashboard');
 });
+Route::get('/login', [SesiController::class, 'dashboard']);
+Route::post('/login', [SesiController::class, 'login']);
+Route::get('/superadmin', [AdminController::class, 'dashboard']);
