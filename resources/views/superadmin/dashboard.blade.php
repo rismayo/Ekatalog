@@ -1,5 +1,7 @@
 @extends('layouts.superadmin')
 
+<link href="{{asset('superadmin/css/style.css')}}" rel="stylesheet">
+
 @section('content')
 
 <h1 class="mt-4">Dashboard</h1>

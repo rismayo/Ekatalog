@@ -1,7 +1,7 @@
 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
         <div class="nav">
-            <div class="sb-sidenav-menu-heading">Core</div>
+            <div class="sb-sidenav-menu-heading"></div>
             <a class="nav-link" href="{{ url ('superadmin/dashboard')}}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
@@ -10,7 +10,7 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Kategori
             </a>
-            <div class="sb-sidenav-menu-heading">Interface</div>
+            <div class="sb-sidenav-menu-heading"></div>
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmins" aria-expanded="false" aria-controls="collapseAdmins">
                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                 Admin UMKM
@@ -33,7 +33,7 @@
                     <a class="nav-link" href="layout-sidenav-light.html">Lihat Produk UMKM</a>
                 </nav>
             </div>
-            <div class="sb-sidenav-menu-heading">Addons</div>
+            <div class="sb-sidenav-menu-heading"></div>
             <a class="nav-link" href="charts.html">
                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                 Charts
@@ -45,7 +45,7 @@
         </div>
     </div>
     <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        Start Bootstrap
+        <div class="small">Created by:</div>
+        Pandawa Sakti
     </div>
 </nav>
