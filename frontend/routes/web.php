@@ -18,9 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/shop', function () {
-    return view('shop');
-});
 Route::get('/testimonial', function () {
     return view('testimonial');
 });
@@ -33,9 +30,9 @@ Route::get('/cart', function () {
 Route::get('/chackout', function () {
     return view('chackout');
 });
-Route::get('/shop-detail', function () {
-    return view('shop-detail');
+Route::get('/profile', function () {
+    return view('profile');
 });
-Route::get('/contact', function () {
-    return view('contact');
+Route::get('/hubungi-kami', function () {
+    return view('hubungi-kami');
 });
