@@ -18,26 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/shop', function () {
-    return view('shop');
+Route::get('/superadmin/crudsuperadmin', function () {
+    return view('superadmin.crudsuperadmin');
 });
-Route::get('/testimonial', function () {
-    return view('testimonial');
-});
-Route::get('/404', function () {
-    return view('404');
-});
-Route::get('/cart', function () {
-    return view('cart');
-});
-Route::get('/chackout', function () {
-    return view('chackout');
-});
-Route::get('/shop-detail', function () {
-    return view('shop-detail');
-});
-Route::get('/contact', function () {
-    return view('contact');
+Route::get('/superadmin/lihatsuperadmin', function () {
+    return view('superadmin.lihatsuperadmin');
 });
 Route::get('/superadmin/dashboard', function () {
     return view('superadmin.dashboard');
