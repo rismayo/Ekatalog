@@ -43,13 +43,13 @@
             <div class="container topbar bg-primary d-none d-lg-block">
                 <div class="d-flex justify-content-between">
                     <div class="top-info ps-2">
-                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
+                        <small class="me-3"><i class=""></i> <a href="#" class="text-white"></a></small>
+                        <small class="me-3"><i class=""></i><a href="#" class="text-white"></a></small>
                     </div>
                     <div class="top-link pe-2">
-                        <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                        <a href="#" class="text-white"><small class="text-white mx-2"></small></a>
+                        <a href="#" class="text-white"><small class="text-white mx-2"></small></a>
+                        <a href="#" class="text-white"><small class="text-white ms-2"></small></a>
                     </div>
                 </div>
             </div>
@@ -61,28 +61,24 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="{{url('/welcome')}}" class="nav-item nav-link">Home</a>
-                            <a href="{{url('/shop')}}" class="nav-item nav-link">Shop</a>
-                            <a href="{{url('/shop-detail')}}" class="nav-item nav-link">Shop Detail</a>
+                            <a href="{{url('/')}}" class="nav-item nav-link active">Beranda</a>
+                            <a href="{{url('/profile')}}" class="nav-item nav-link">Profile</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Produk</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <a href="{{url('/cart')}}" class="dropdown-item">Cart</a>
                                     <a href="{{url('/chackout')}}" class="dropdown-item">Chackout</a>
                                     <a href="{{url('/testimonial')}}" class="dropdown-item">Testimonial</a>
-                                    <a href="{{url('/404')}}" class="dropdown-item active">404 Page</a>
+                                    <a href="{{url('/404')}}" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
-                            <a href="{{url('/contact')}}" class="nav-item nav-link">Contact</a>
+                            <a href="{{url('/hubungi-kami')}}" class="nav-item nav-link">Hubungi kami</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                             <a href="#" class="position-relative me-4 my-auto">
-                                <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
                             <a href="#" class="my-auto">
-                                <i class="fas fa-user fa-2x"></i>
                             </a>
                         </div>
                     </div>
@@ -133,7 +129,7 @@
                         <h1 class="display-1">404</h1>
                         <h1 class="mb-4">Page Not Found</h1>
                         <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website! Maybe go to our home page or try to use a search?</p>
-                        <a class="btn border-secondary rounded-pill py-3 px-5" href="{{url('/welcome')}}p">Go Back To Home</a>
+                        <a class="btn border-secondary rounded-pill py-3 px-5" href="{{url('/welcome')}}">Go Back To Home</a>
                     </div>
                 </div>
             </div>
