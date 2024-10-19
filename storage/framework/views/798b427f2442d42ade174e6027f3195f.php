@@ -18,15 +18,15 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="{{asset('lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet">
-        <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+        <link href="<?php echo e(asset('lib/lightbox/css/lightbox.min.css')); ?>" rel="stylesheet">
+        <link href="<?php echo e(asset('lib/owlcarousel/assets/owl.carousel.min.css')); ?>" rel="stylesheet">
 
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="<?php echo e(asset('css/bootstrap.min.css')); ?>" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="{{asset('css/style.css')}}" rel="stylesheet">
+        <link href="<?php echo e(asset('css/style.css')); ?>" rel="stylesheet">
     </head>
 
     <body>
@@ -55,25 +55,25 @@
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="{{url('/')}}" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="<?php echo e(url('/welcome')); ?>" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="{{url('/')}}" class="nav-item nav-link">Home</a>
-                            <a href="{{url('/shop')}}" class="nav-item nav-link">Shop</a>
-                            <a href="{{url('/shop-detail')}}" class="nav-item nav-link active">Shop Detail</a>
+                            <a href="<?php echo e(url('/welcome')); ?>" class="nav-item nav-link">Home</a>
+                            <a href="<?php echo e(url('/shop')); ?>" class="nav-item nav-link">Shop</a>
+                            <a href="<?php echo e(url('/shop-detail')); ?>" class="nav-item nav-link active">Shop Detail</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="{{url('/cart')}}" class="dropdown-item">Cart</a>
-                                    <a href="{{url('/chackout')}}" class="dropdown-item">Chackout</a>
-                                    <a href="{{url('/testimonial')}}" class="dropdown-item">Testimonial</a>
-                                    <a href="{{url('/404')}}" class="dropdown-item">404 Page</a>
+                                    <a href="<?php echo e(url('/cart')); ?>" class="dropdown-item">Cart</a>
+                                    <a href="<?php echo e(url('/chackout')); ?>" class="dropdown-item">Chackout</a>
+                                    <a href="<?php echo e(url('/testimonial')); ?>" class="dropdown-item">Testimonial</a>
+                                    <a href="<?php echo e(url('/404')); ?>" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
-                            <a href="{{url('/contact')}}" class="nav-item nav-link">Contact</a>
+                            <a href="<?php echo e(url('/contact')); ?>" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
@@ -714,7 +714,7 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="{{('js/main.js')}}"></script>
+    <script src="<?php echo e(('js/main.js')); ?>"></script>
     </body>
 
-</html>
+</html><?php /**PATH C:\xampp\htdocs\proyek1\resources\views/shop-detail.blade.php ENDPATH**/ ?>

@@ -18,14 +18,14 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="{{asset('lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet">
-        <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+        <link href="<?php echo e(asset('lib/lightbox/css/lightbox.min.css')); ?>" rel="stylesheet">
+        <link href="<?php echo e(asset('lib/owlcarousel/assets/owl.carousel.min.css')); ?>" rel="stylesheet">
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="<?php echo e(asset('css/bootstrap.min.css')); ?>" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="{{asset('css/style.css')}}" rel="stylesheet">
+        <link href="<?php echo e(asset('css/style.css')); ?>" rel="stylesheet">
     </head>
 
     <body>
@@ -37,6 +37,7 @@
         <!-- Spinner End -->
 
 
+        
         <div class="container-fluid fixed-top">
             <div class="container topbar bg-primary d-none d-lg-block">
                 <div class="d-flex justify-content-between">
@@ -59,18 +60,19 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="welcome.blade.php" class="nav-item nav-link active">Beranda</a>
-                            <a href="{{url('/profile')}}" class="nav-item nav-link">Profile</a>
+                            <a href="welcome.blade.php" class="nav-item nav-link active">Home</a>
+                            <a href="<?php echo e(url('/shop')); ?>" class="nav-item nav-link">Shop</a>
+                            <a href="<?php echo e(url('/shop-detail')); ?>" class="nav-item nav-link">Shop Detail</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Produk</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="{{url('/cart')}}" class="dropdown-item">Cart</a>
-                                    <a href="{{url('/chackout')}}" class="dropdown-item">Chackout</a>
-                                    <a href="{{url('/testimonial')}}" class="dropdown-item">Testimonial</a>
-                                    <a href="{{url('/404')}}" class="dropdown-item">404 Page</a>
+                                    <a href="<?php echo e(url('/cart')); ?>" class="dropdown-item">Cart</a>
+                                    <a href="<?php echo e(url('/chackout')); ?>" class="dropdown-item">Chackout</a>
+                                    <a href="<?php echo e(url('/testimonial')); ?>" class="dropdown-item">Testimonial</a>
+                                    <a href="<?php echo e(url('/404')); ?>" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
-                            <a href="{{url('/hubungi-kami')}}" class="nav-item nav-link">Hubungi kami</a>
+                            <a href="<?php echo e(url('/contact')); ?>" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
@@ -86,6 +88,8 @@
                 </nav>
             </div>
         </div>
+        <!-- Navbar End -->
+
 
         <!-- Modal Search Start -->
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1204,7 +1208,7 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="{{asset('js/main.js')}}"></script>
+    <script src="<?php echo e(asset('js/main.js')); ?>"></script>
     </body>
 
-</html>
+</html><?php /**PATH C:\xampp\htdocs\proyek1\resources\views/welcome.blade.php ENDPATH**/ ?>
