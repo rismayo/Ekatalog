@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\AdminController;
@@ -18,13 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/superadmin/crudsuperadmin', function () {
+Route::get('/crudsuperadmin', function () {
     return view('superadmin.crudsuperadmin');
 });
-Route::get('/superadmin/lihatsuperadmin', function () {
+Route::get('/lihatsuperadmin', function () {
     return view('superadmin.lihatsuperadmin');
 });
-Route::get('/superadmin/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('superadmin.dashboard');
 });
 Route::get('/login', [SesiController::class, 'dashboard']);
