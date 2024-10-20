@@ -27,7 +27,10 @@
 }
 /*** Spinner End ***/
 /*** dina ***/
-
+.mb-4 {
+    margin-bottom: 1.5rem !important
+    
+}
 /*** dina ***/
 /*** Button Start ***/
 .btn {

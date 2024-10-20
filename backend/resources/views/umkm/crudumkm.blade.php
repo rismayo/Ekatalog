@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CRUD Data Admin</title>
+    <title>CRUD Data UMKM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   </head>
   <body class="bg-light">
@@ -17,14 +17,6 @@
        <!-- START FORM --> 
        <form action='' method='post'>
         <div class="my-3 p-3 bg-body rounded shadow-sm">
-            <!-- ID User -->
-            <div class="mb-3 row">
-                <label for="id_user" class="col-sm-2 col-form-label">ID User</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" name='id_user' id="id_user">
-                </div>
-            </div>
-
             <!-- ID UMKM -->
             <div class="mb-3 row">
                 <label for="id_umkm" class="col-sm-2 col-form-label">ID UMKM</label>
@@ -33,52 +25,36 @@
                 </div>
             </div>
 
-            <!-- Nama User -->
+            <!-- Nama UMKM -->
             <div class="mb-3 row">
-                <label for="nama_user" class="col-sm-2 col-form-label">Nama User</label>
+                <label for="nama_user" class="col-sm-2 col-form-label">Nama UMKM</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name='nama_user' id="nama_user">
                 </div>
             </div>
 
-            <!-- Email -->
+            <!-- Pemilik -->
             <div class="mb-3 row">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <label for="nama_umkm" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" name='email' id="email">
+                    <input type="text" class="form-control" name='nama_umkm' id="nama_umkm">
                 </div>
             </div>
 
-            <!-- Password -->
+            <!-- Alamat -->
             <div class="mb-3 row">
-                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" name='password' id="password">
+                    <input type="text" class="form-control" name='alamat' id="alamat">
                 </div>
             </div>
-
-            <!-- Level (Admin/Superadmin) -->
+            <!-- NoHP -->
             <div class="mb-3 row">
-                <label for="level" class="col-sm-2 col-form-label">Level</label>
+                <label for="NoHP" class="col-sm-2 col-form-label">Nomor HP</label>
                 <div class="col-sm-10">
-                    <select class="form-select" name="level" id="level">
-                        <option value="admin">Admin</option>
-                        <option value="superadmin">Superadmin</option>
-                    </select>
+                    <input type="tel" class="form-control" name='alamat' id="alamat" placeholder="Masukkan nomor HP" required>
                 </div>
             </div>
-
-            <!-- Status (Aktif/Tidak Aktif) -->
-            <div class="mb-3 row">
-                <label for="status" class="col-sm-2 col-form-label">Status</label>
-                <div class="col-sm-10">
-                    <select class="form-select" name="status" id="status">
-                        <option value="aktif">Aktif</option>
-                        <option value="tidak_aktif">Tidak Aktif</option>
-                    </select>
-                </div>
-            </div>
-
             <!-- Submit Button -->
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label"></label>

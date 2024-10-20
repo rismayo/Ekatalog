@@ -62,7 +62,7 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="{{url('/')}}" class="nav-item nav-link">Beranda</a>
-                            <a href="{{url('/profile')}}" class="nav-item nav-link">Profile</a>
+                            <a href="{{url('/profile')}}" class="nav-item nav-link active">Profile</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Produk</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -72,7 +72,7 @@
                                     <a href="{{url('/404')}}" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
-                            <a href="{{url('/hubungi-kami')}}" class="nav-item nav-link active">Hubungi Kami</a>
+                            <a href="{{url('/hubungi-kami')}}" class="nav-item nav-link">Hubungi Kami</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>

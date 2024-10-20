@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\AdminController;
@@ -19,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/crudsuperadmin', function () {
+Route::get('/superadmin/crudsuperadmin', function () {
     return view('superadmin.crudsuperadmin');
 });
-Route::get('/lihatsuperadmin', function () {
+Route::get('/superadmin/lihatsuperadmin', function () {
     return view('superadmin.lihatsuperadmin');
 });
 Route::get('/dashboard', function () {
