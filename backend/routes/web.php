@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -30,6 +29,7 @@ Route::get('/superadmin/lihatsuperadmin', function () {
 Route::get('/umkm/crudumkm', function () {
     return view('umkm.crudumkm');
 });
+<<<<<<< HEAD
 Route::get('/produk/crudproduk', function () {
     return view('produk.crudproduk');
 });
@@ -42,14 +42,19 @@ Route::get('/superadmin/lihatsuperadmin', function () {
 Route::get('/umkm/lihatumkm', function () {
     return view('umkm.lihatumkm'); 
 });
+=======
+>>>>>>> a506fae1204ca5b8339a0f8f0547698d3b2035ad
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
 });
-Route::get('/home', function () {
-    return redirect('/superadmin/dashboard');
-});
-Route::middleware(['auth'])->group(function(){
-    Route::get('/superadmin', [AdminController::class, 'dashboard']);
-    Route::get('/superadmin/logout', [SesiController::class, 'logout']);
+// Rute untuk pengguna yang sudah login
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', function () {
+        return redirect('/superadmin/dashboard');
+    });
+
+    Route::get('/superadmin', [AdminController::class, 'dashboard']); // Halaman dashboard
+
+    Route::get('/superadmin/logout', [SesiController::class, 'logout']); // Proses logout
 });
