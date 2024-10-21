@@ -34,10 +34,15 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
 });
-Route::get('/home', function () {
-    return redirect('/superadmin/dashboard');
-});
-Route::middleware(['auth'])->group(function(){
-    Route::get('/superadmin', [AdminController::class, 'dashboard']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', function () {
+        return redirect('/superadmin/dashboard');
+    });
+
+    Route::get('/superadmin', [AdminController::class, 'dashboard']); 
+
     Route::get('/superadmin/logout', [SesiController::class, 'logout']);
+});
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
 });
