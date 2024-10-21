@@ -29,7 +29,6 @@ Route::get('/superadmin/lihatsuperadmin', function () {
 Route::get('/umkm/crudumkm', function () {
     return view('umkm.crudumkm');
 });
-
 Route::get('/produk/crudproduk', function () {
     return view('produk.crudproduk');
 });
