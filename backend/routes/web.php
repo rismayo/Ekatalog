@@ -29,7 +29,7 @@ Route::get('/superadmin/lihatsuperadmin', function () {
 Route::get('/umkm/crudumkm', function () {
     return view('umkm.crudumkm');
 });
-<<<<<<< HEAD
+
 Route::get('/produk/crudproduk', function () {
     return view('produk.crudproduk');
 });
@@ -42,8 +42,7 @@ Route::get('/superadmin/lihatsuperadmin', function () {
 Route::get('/umkm/lihatumkm', function () {
     return view('umkm.lihatumkm'); 
 });
-=======
->>>>>>> a506fae1204ca5b8339a0f8f0547698d3b2035ad
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
