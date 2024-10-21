@@ -33,6 +33,15 @@ Route::get('/umkm/crudumkm', function () {
 Route::get('/produk/crudproduk', function () {
     return view('produk.crudproduk');
 });
+Route::get('/produk/lihatproduk', function () {
+    return view('produk.lihatproduk'); 
+});
+Route::get('/superadmin/lihatsuperadmin', function () {
+    return view('superadmin.lihatsuperadmin'); 
+});
+Route::get('/umkm/lihatumkm', function () {
+    return view('umkm.lihatumkm'); 
+});
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);

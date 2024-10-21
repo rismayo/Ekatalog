@@ -32,8 +32,12 @@ class SesiController extends Controller
         }
     }
 
-    function logout() {
+    public function logout()
+    {
         Auth::logout();
+        request()->session()->invalidate(); // Menghapus semua data sesi
+        request()->session()->regenerateToken(); // Regenerasi token CSRF
+
         return redirect('/login');
     }
 }

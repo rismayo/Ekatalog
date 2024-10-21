@@ -16,22 +16,12 @@ class DummyUsersSeeder extends Seeder
         $userData = [
             [
                 'id_user'=>'1',
-                'id_umkm'=>'1',
                 'nama_user'=> 'agungprasetyo',
                 'email'=>'agungpras@gmail.com',
                 'password'=>bcrypt('123456'),
                 'level'=>'Superadmin',
                 'status'=>'Aktif'
             ],
-            [
-                'id_user'=>'2',
-                'id_umkm'=>'2',
-                'nama_user'=> 'rahmadina',
-                'email'=>'rahmadina@gmail.com',
-                'password'=>bcrypt('123456'),
-                'level'=>'Admin',
-                'status'=>'Aktif'
-            ]
         ];
 
         foreach($userData as $key => $val){
