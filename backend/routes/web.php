@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
+Route::get('/superadmin/dashboard', function () {
     return view('superadmin.dashboard');
 });
 Route::get('/superadmin/crudsuperadmin', function () {
@@ -33,10 +33,13 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
 });
-Route::get('/home', function () {
-    return redirect('/superadmin/dashboard');
-});
-Route::middleware(['auth'])->group(function(){
-    Route::get('/superadmin', [AdminController::class, 'dashboard']);
-    Route::get('/superadmin/logout', [SesiController::class, 'logout']);
+// Rute untuk pengguna yang sudah login
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', function () {
+        return redirect('/superadmin/dashboard');
+    });
+
+    Route::get('/superadmin', [AdminController::class, 'dashboard']); // Halaman dashboard
+
+    Route::get('/superadmin/logout', [SesiController::class, 'logout']); // Proses logout
 });

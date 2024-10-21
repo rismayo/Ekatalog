@@ -28,7 +28,12 @@ class SesiController extends Controller
         if(Auth::attempt($infologin)){
             return redirect('/superadmin/dashboard');
         }else{
-            return redirect('')->withErrors('email dan password yang dimasukkan tidak sesuai')->withInput();
+            return redirect('/login')->withErrors('email dan password yang dimasukkan tidak sesuai')->withInput();
         }
+    }
+
+    function logout() {
+        Auth::logout();
+        return redirect('/login');
     }
 }
