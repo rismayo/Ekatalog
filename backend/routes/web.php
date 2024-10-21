@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -30,10 +29,25 @@ Route::get('/superadmin/lihatsuperadmin', function () {
 Route::get('/umkm/crudumkm', function () {
     return view('umkm.crudumkm');
 });
+
+Route::get('/produk/crudproduk', function () {
+    return view('produk.crudproduk');
+});
+Route::get('/produk/lihatproduk', function () {
+    return view('produk.lihatproduk'); 
+});
+Route::get('/superadmin/lihatsuperadmin', function () {
+    return view('superadmin.lihatsuperadmin'); 
+});
+Route::get('/umkm/lihatumkm', function () {
+    return view('umkm.lihatumkm'); 
+});
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
 });
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return redirect('/superadmin/dashboard');
