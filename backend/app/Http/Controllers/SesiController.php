@@ -24,6 +24,7 @@ class SesiController extends Controller
             'email'=>$request->email,
             'password'=>$request->password
         ];
+        
 
         if (Auth::attempt($infologin)) {
             // Cek level pengguna setelah login
