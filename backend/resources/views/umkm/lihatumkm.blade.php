@@ -20,7 +20,10 @@
         
         <!-- TOMBOL TAMBAH DATA -->
         <div class="pb-3">
-            <a href="{{ url('/umkm/crudumkm') }}" class="btn btn-primary">+ Tambah Data</a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahDataModal">
+                + Tambah Data
+            </button>
         </div>
 
         <!-- TABEL PRODUK -->
@@ -41,7 +44,7 @@
                         <td>1</td>
                         <td>Dina Catring</td>
                         <td>dina@gmail.com</td>
-                        <td>Magetam</td>
+                        <td>Magetan</td>
                         <td>0853425262</td>
                         <td>
                             <a href="{{ url('/produk/edit/1') }}" class="btn btn-warning btn-sm">Edit</a>
@@ -53,9 +56,94 @@
         </div>
     </div>
     <!-- AKHIR DATA -->
+
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data UMKM</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- FORM TAMBAH DATA -->
+                    <form id="addDataForm" action="" method="post">
+                        @csrf
+                        <!-- ID UMKM -->
+                        <div class="mb-3 row">
+                            <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name='id_umkm' id="id_umkm" required>
+                            </div>
+                        </div>
+                        <!-- Nama UMKM -->
+                        <div class="mb-3 row">
+                            <label for="nama_user" class="col-sm-4 col-form-label">Nama UMKM</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="nama_user" id="nama_user" required>
+                            </div>
+                        </div>
+                        <!-- Email -->
+                        <div class="mb-3 row">
+                            <label for="nama_umkm" class="col-sm-4 col-form-label">Email</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" name="nama_umkm" id="nama_umkm" required>
+                            </div>
+                        </div>
+                        <!-- Alamat -->
+                        <div class="mb-3 row">
+                            <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="alamat" id="alamat" required>
+                            </div>
+                        </div>
+                        <!-- NoHP -->
+                        <div class="mb-3 row">
+                            <label for="NoHP" class="col-sm-4 col-form-label">Nomor HP</label>
+                            <div class="col-sm-8">
+                                <input type="tel" class="form-control" name="NoHP" id="NoHP" placeholder="Masukkan nomor HP" required>
+                            </div>
+                        </div>
+                        <!-- Submit Buttons -->
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-default me-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">BATAL</button>
+                            <button type="submit" class="btn btn-primary">SIMPAN</button>
+                        </div>
+                    </form>
+                    <!-- AKHIR FORM -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Batal -->
+    <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmCancelModalLabel">Konfirmasi Batal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin membatalkan penambahan data?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="resetForm()">Ya, Batalkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Akhir Modal Konfirmasi Batal -->
+
 </main>
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script>
+    function resetForm() {
+        document.getElementById('addDataForm').reset();
+    }
+</script>
 @endpush
 @endsection
