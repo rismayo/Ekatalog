@@ -24,11 +24,18 @@ class SesiController extends Controller
             'email'=>$request->email,
             'password'=>$request->password
         ];
+        
 
-        if(Auth::attempt($infologin)){
-            return redirect('/superadmin/dashboard');
-        }else{
-            return redirect('/login')->withErrors('email dan password yang dimasukkan tidak sesuai')->withInput();
+        if (Auth::attempt($infologin)) {
+            // Cek level pengguna setelah login
+            if (Auth::user()->level == 'superadmin') {
+                return redirect('/superadmin/dashboard');
+            } elseif (Auth::user()->level == 'admin') {
+                return redirect('/admin/dashboard');
+            }
+        } else {
+            // Jika login gagal, kembali ke halaman login dengan pesan error
+            return redirect('/login')->withErrors('Email dan password yang dimasukkan tidak sesuai')->withInput();
         }
     }
 
