@@ -67,7 +67,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- FORM TAMBAH DATA -->
-                    <form id="addDataForm" action="" method="post">
+                    <form id="addDataForm" action="{{ route('umkm.store') }}" method="POST">
                         @csrf
                         <!-- ID UMKM -->
                         <div class="mb-3 row">

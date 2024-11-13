@@ -20,7 +20,6 @@
             </a>
             <div class="collapse" id="collapseUMKM" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="{{ url('umkm/crudumkm') }}">Tambah UMKM</a>
                     <a class="nav-link" href="{{ url('umkm/lihatumkm') }}">Lihat UMKM</a>
                 </nav>
             </div>
@@ -32,7 +31,6 @@
             </a>
             <div class="collapse" id="collapseAdmins" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="{{ url('superadmin/crudsuperadmin') }}">Tambah Admin UMKM</a>
                     <a class="nav-link" href="{{ url('superadmin/lihatsuperadmin') }}">Lihat Admin UMKM</a>
                 </nav>
             </div>
@@ -45,7 +43,6 @@
             </a>
             <div class="collapse" id="collapseProducts" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="{{ url('produk/crudproduk') }}">Tambah Produk UMKM</a>
                     <a class="nav-link" href="{{ url('produk/lihatproduk') }}">Lihat Produk UMKM</a>
                 </nav>
             </div>
