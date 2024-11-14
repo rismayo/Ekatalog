@@ -40,17 +40,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center align-middle">
-                        <td>1</td>
-                        <td>Dina Catring</td>
-                        <td>dina@gmail.com</td>
-                        <td>Magetan</td>
-                        <td>0853425262</td>
-                        <td>
-                            <a href="{{ url('/produk/edit/1') }}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{{ url('/produk/delete/1') }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
-                        </td>
-                    </tr>
+                @foreach ($umkms as $index => $umkm)
+                <tr>
+                    <td>{{ $index + 1}}</td>
+                    <td>{{ $umkm->nama_umkm }}</td>
+                    <td>{{ $umkm->pemilik }}</td>
+                    <td>{{ $umkm->alamat_umkm }}</td>
+                    <td>{{ $umkm->no_hp }}</td>
+                    <td>
+                        <a  class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#tambahDataModal" >Edit</a>
+                        <a href="{{ route('umkm.destroy', $umkm->id_umkm) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
+                    </td>
+                </tr>
+            @endforeach
                 </tbody>
             </table>
         </div>
@@ -80,16 +82,17 @@
                         <div class="mb-3 row">
                             <label for="nama_user" class="col-sm-4 col-form-label">Nama UMKM</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama_user" id="nama_user" required>
+                                <input type="text" class="form-control" name="nama_umkm" id="nama_umkm" required>
                             </div>
                         </div>
-                        <!-- Email -->
+                        <!-- Nama UMKM -->
                         <div class="mb-3 row">
-                            <label for="nama_umkm" class="col-sm-4 col-form-label">Email</label>
+                            <label for="nama_user" class="col-sm-4 col-form-label">Pemilik</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" name="nama_umkm" id="nama_umkm" required>
+                                <input type="text" class="form-control" name="pemilik" id="pemilik" required>
                             </div>
                         </div>
+                       
                         <!-- Alamat -->
                         <div class="mb-3 row">
                             <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
@@ -101,7 +104,7 @@
                         <div class="mb-3 row">
                             <label for="NoHP" class="col-sm-4 col-form-label">Nomor HP</label>
                             <div class="col-sm-8">
-                                <input type="tel" class="form-control" name="NoHP" id="NoHP" placeholder="Masukkan nomor HP" required>
+                                <input type="tel" class="form-control" name="no_hp" id="no_hp" placeholder="Masukkan nomor HP" required>
                             </div>
                         </div>
                         <!-- Submit Buttons -->
@@ -137,6 +140,16 @@
     <!-- Akhir Modal Konfirmasi Batal -->
 
 </main>
+
+<!-- JavaScript untuk Memicu Modal Jika `$showModal` True -->
+@if (isset($showModal) && $showModal)
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        var editDataModal = new bootstrap.Modal(document.getElementById("tambahDataModal"));
+        editDataModal.show();
+    });
+</script>
+@endif
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>

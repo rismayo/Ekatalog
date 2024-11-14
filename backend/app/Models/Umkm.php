@@ -10,12 +10,14 @@ class Umkm extends Model
     use HasFactory;
 
     protected $table = 'ms_umkm';
+    public $timestamps = false;
+    protected $primaryKey = 'id_umkm';
 
     protected $fillable = [
         'id_umkm',
         'nama_umkm',
         'pemilik',
         'alamat_umkm',
-        'no_HP',
+        'no_hp',
     ];
 }
