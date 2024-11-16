@@ -44,22 +44,22 @@
                 @foreach ($produks as $index => $produk)
                 <tr class="text-center align-middle">
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $product->id_produk }}</td>
-                    <td>{{ $product->id_user }}</td>
-                    <td>{{ $product->id_kategori }}</td>
-                    <td>{{ $product->id_umkm }}</td>
-                    <td>{{ $product->nama_produk }}</td>
-                    <td>{{ $product->deskripsi_produk }}</td>
-                    <td>{{ number_format($product->harga_produk, 0, ',', '.') }}</td>
+                    <td>{{ $produk->id_produk }}</td>
+                    <td>{{ $produk->id_user }}</td>
+                    <td>{{ $produk->id_kategori }}</td>
+                    <td>{{ $produk->id_umkm }}</td>
+                    <td>{{ $produk->nama_produk }}</td>
+                    <td>{{ $produk->deskripsi_produk }}</td>
+                    <td>{{ number_format($produk->harga_produk, 0, ',', '.') }}</td>
                     <td>
-                        @if ($product->foto_produk)
+                        @if ($produk->foto_produk)
                                 <img src="{{ asset('storage/' . $product->foto_produk) }}" alt="Foto Produk" width="50">
                             @else
                                 Tidak ada foto
                             @endif
                             <td>
-                                <a href="{{ route('produk.edit', $product->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('produk.destroy', $product->id_produk) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('produk.edit', $produk->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('produk.destroy', $produk->id_produk) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</button>
@@ -82,7 +82,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form id="addDataForm" action="{{ route('produk.store') }}" method="POST">
                         @csrf
                         <div class="mb-3 row">
                             <label for="id_produk" class="col-sm-4 col-form-label">Id Produk</label>
@@ -178,5 +178,10 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script>
+    function resetForm() {
+        document.getElementById('addDataForm').reset();
+    }
+</script>
 @endpush
 @endsection
