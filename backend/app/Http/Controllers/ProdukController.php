@@ -12,10 +12,10 @@ class ProdukController extends Controller
     public function index(Request $request)
     {
          // Ambil data dari tabel `umkms`
-         $produks = Produk::all(); // Pastikan nama variabelnya `$umkms`
+         $products = Produk::all(); // Pastikan nama variabelnya `$umkms`
         
-         // Kirim data ke view dengan `compact('produks')`
-         return view('produk.lihatproduk', compact('produks'));
+         // Kirim data ke view dengan `compact('product')`
+         return view('produk.lihatproduk', compact('products'));
     }
 
      // Store a new UMKM record
@@ -32,6 +32,7 @@ class ProdukController extends Controller
         error_log($request->status);
         
         $request->validate([
+            'id_produk' => 'required|unique:products,id_produk',
             'id_produk' => 'required|unique:ms_produk,id_produk',
             'id_user' => 'required|integer',
             'id_kategori' => 'required|integer',
@@ -108,8 +109,8 @@ class ProdukController extends Controller
     // Delete Product record
     public function destroy($id)
     {
-        $produks = Produk::findOrFail($id);
-        $produks->delete();
+        $product = Produk::findOrFail($id);
+        $product->delete();
 
         return redirect()->route('produk.lihatproduk')->with('success', 'Data produk berhasil dihapus');
     }
