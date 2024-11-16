@@ -41,25 +41,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($produks as $index => $produk)
+                @foreach ($produk as $index => $produk)
                 <tr class="text-center align-middle">
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $produk->id_produk }}</td>
-                    <td>{{ $produk->id_user }}</td>
-                    <td>{{ $produk->id_kategori }}</td>
-                    <td>{{ $produk->id_umkm }}</td>
-                    <td>{{ $produk->nama_produk }}</td>
-                    <td>{{ $produk->deskripsi_produk }}</td>
-                    <td>{{ number_format($produk->harga_produk, 0, ',', '.') }}</td>
+                    <td>{{ $product->id_produk }}</td>
+                    <td>{{ $product->id_user }}</td>
+                    <td>{{ $product->id_kategori }}</td>
+                    <td>{{ $product->id_umkm }}</td>
+                    <td>{{ $product->nama_produk }}</td>
+                    <td>{{ $product->deskripsi_produk }}</td>
+                    <td>{{ number_format($product->harga_produk, 0, ',', '.') }}</td>
                     <td>
-                        @if ($produk->foto_produk)
+                        @if ($product->foto_produk)
                                 <img src="{{ asset('storage/' . $product->foto_produk) }}" alt="Foto Produk" width="50">
                             @else
                                 Tidak ada foto
                             @endif
                             <td>
-                                <a href="{{ route('produk.edit', $produk->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('produk.destroy', $produk->id_produk) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('produk.edit', $product->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('produk.destroy', $product->id_produk) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</button>

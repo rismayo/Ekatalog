@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\umkmController;
+use App\Http\Controllers\SuperAdminController;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Route;
 
@@ -72,4 +73,27 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
+});
+
+// Route untuk SuperAdmin
+Route::prefix('superadmin')->group(function () {
+    // Tampilkan daftar admin
+    Route::get('/', [SuperadminController::class, 'index'])->name('superadmin.lihatadmin');
+
+    // Form tambah admin baru
+    Route::get('/create', function () {
+        return view('adminumkm/lihat.adminumkm'); // Pastikan view `create.blade.php` ada di folder `resources/views/superadmin`
+    })->name('adminumkm/lihatumkm');
+
+    // Simpan admin baru
+    Route::post('/store', [SuperadminController::class, 'store'])->name('superadmin.store');
+
+    // Form edit admin
+    Route::get('/edit/{id}', [SuperadminController::class, 'edit'])->name('superadmin.edit');
+
+    // Update admin
+    Route::post('/update/{id}', [SuperadminController::class, 'update'])->name('superadmin.update');
+
+    // Hapus admin
+    Route::get('/delete/{id}', [SuperadminController::class, 'destroy'])->name('superadmin.delete');
 });
