@@ -6,7 +6,7 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
-            <a class="nav-link" href="{{ url('superadmin/kategori') }}">
+            <a class="nav-link" href="{{ url('kategori/lihatkategori') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Kategori
             </a>

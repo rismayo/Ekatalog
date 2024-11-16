@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\umkmController;
+use App\Http\Controllers\KategoriController;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,19 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
 });
+
+Route::get('/kategori/lihatkategori', function () {
+    return view('kategori.lihatkategori'); 
+});
+Route::get('/kategori/lihatkategori', [KategoriController::class, 'index'])->name('kategori.lihatkategori');
+
+Route::post('/kategori/lihatkategori', [KategoriController::class, 'store'])->name('kategori.store');
+
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
+
+Route::put('/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+
+Route::delete('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
