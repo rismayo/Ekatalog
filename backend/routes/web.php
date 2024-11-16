@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\umkmController;
+use App\Models\Produk;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +29,20 @@ Route::get('/superadmin/lihatsuperadmin', function () {
 Route::get('/produk/lihatproduk', function () {
     return view('produk.lihatproduk'); 
 });
+Route::get('/produk/lihatproduk', [ProdukController::class, 'index'])->name('produk.lihatproduk');
+
+Route::post('/produk/lihatproduk', [ProdukController::class, 'store'])->name('produk.store');
+
+Route::get('/produk/edit/{id}', [ProdukController::class, 'edit'])->name('produk.edit');
+
+Route::put('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
+
+Route::delete('/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+
 Route::get('/superadmin/lihatsuperadmin', function () {
     return view('superadmin.lihatsuperadmin'); 
 });
+
 Route::get('/umkm/lihatumkm', function () {
     return view('umkm.lihatumkm'); 
 });

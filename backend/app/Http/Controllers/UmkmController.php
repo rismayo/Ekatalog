@@ -72,16 +72,16 @@ class UmkmController extends Controller
             'no_HP' => 'required|numeric',
         ]);
 
-        $umkm = umkm::findOrFail($id);
-        $umkm->update($request->all());
+        $umkms = umkm::findOrFail($id);
+        $umkms->update($request->all());
         return redirect()->route('umkm.lihatumkm')->with('success', 'Data UMKM berhasil diperbarui');
     }
 
     // Delete UMKM record
     public function destroy($id)
     {
-        $umkm = umkm::findOrFail($id);
-        $umkm->delete();
+        $umkms = umkm::findOrFail($id);
+        $umkms->delete();
         return redirect()->route('umkm.lihatumkm')->with('success', 'Data UMKM berhasil dihapus');
     }
 }
