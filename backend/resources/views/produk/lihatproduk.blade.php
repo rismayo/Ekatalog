@@ -29,37 +29,33 @@
                 <thead class="text-center">
                     <tr>
                         <th>Id Produk</th>
-                        <th>Id User</th>
-                        <th>Id Kategori</th>
                         <th>Id UMKM</th>
-                        <th>Nama Produk</th>
-                        <th>Deskripsi Produk</th>
-                        <th>Harga Produk</th>
-                        <th>Foto Produk</th>
+                        <th>Nama</th>
+                        <th>Deskripsi</th>
                         <th>Status</th>
+                        <th>Harga</th>
+                        <th>Foto</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($produk as $index => $produk)
+                @foreach ($products as $index => $produk)
                 <tr class="text-center align-middle">
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $product->id_produk }}</td>
-                    <td>{{ $product->id_user }}</td>
-                    <td>{{ $product->id_kategori }}</td>
-                    <td>{{ $product->id_umkm }}</td>
-                    <td>{{ $product->nama_produk }}</td>
-                    <td>{{ $product->deskripsi_produk }}</td>
-                    <td>{{ number_format($product->harga_produk, 0, ',', '.') }}</td>
+                    <td>{{ $produk->id_produk }}</td>
+                    <td>{{ $produk->id_umkm }}</td>
+                    <td>{{ $produk->nama_produk }}</td>
+                    <td>{{ $produk->deskripsi_produk }}</td>
+                    <td>{{ $produk->status }}</td>
+                    <td>{{ number_format($produk->harga_produk, 0, ',', '.') }}</td>
                     <td>
-                        @if ($product->foto_produk)
-                                <img src="{{ asset('storage/' . $product->foto_produk) }}" alt="Foto Produk" width="50">
+                        @if ($produk->foto_produk)
+                                <img src="{{ asset('storage/' . $produk->foto_produk) }}" alt="Foto Produk" width="50">
                             @else
                                 Tidak ada foto
                             @endif
                             <td>
-                                <a href="{{ route('produk.edit', $product->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('produk.destroy', $product->id_produk) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('produk.edit', $produk->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('produk.destroy', $produk->id_produk) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</button>

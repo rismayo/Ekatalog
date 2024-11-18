@@ -40,38 +40,25 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                @forelse ($admins as $admin)
-                        <tr class="text-center align-middle">
-                            <td>{{ $admin->id_user }}</td>
-                            <td>{{ $admin->id_umkm }}</td>
-                            <td>{{ $admin->nama_user }}</td>
-                            <td>{{ $admin->email }}</td>
-                            <td>
-                                @if ($admin->level === 'superadmin')
-                                    Super Admin
-                                @elseif ($admin->level === 'pengelola')
-                                    Pengelola
-                                @elseif ($admin->level === 'pemilik')
-                                    Pemilik
-                                @else
-                                    Tidak Diketahui
-                                @endif
-                            </td>
-                            <td>{{ $admin->status ? 'Aktif' : 'Tidak Aktif' }}</td>
-                            <td>
-                                <a href="{{ route('superadmin.edit', $admin->id_user) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('superadmin.destroy', $admin->id_user) }}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                </form>
-                            </td>
+                <tbody>
+                @foreach ($superadmin as $index => $superadmin)
+                    <tr class="text-center align-middle">
+                        <td>{{ $admin->id_user }}</td>
+                        <td>{{ $admin->id_umkm }}</td>
+                        <td>{{ $admin->nama_user }}</td>
+                        <td>{{ $admin->email }}</td>
+                        <td>{{ $admin->level }}</td>
+                        <td>{{ $admin->status}}</td>
+                        <td>
+                            <a href="{{ route('superadmin.edit', $admin->id_user) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('superadmin.destroy', $admin->id_user) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                            </form>
+                        </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="text-center">Tidak ada data.</td>
-                        </tr>
-                    @endforelse
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -88,7 +75,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- START FORM --> 
-                    <form id="addDataForm" action='{{ route('/store') }}' method='post' onsubmit="showSuccessModal(event)">
+                    <form id="addDataForm" action='{{ route('superadmin.store') }}' method='post' onsubmit="showSuccessModal(event)">
                         @csrf
                         <!-- ID User -->
                         <div class="mb-3 row">
