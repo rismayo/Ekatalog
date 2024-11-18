@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\umkmController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SuperAdminController;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,19 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [SesiController::class, 'login']);
 });
 
+Route::get('/kategori/lihatkategori', function () {
+    return view('kategori.lihatkategori'); 
+});
+Route::get('/kategori/lihatkategori', [KategoriController::class, 'index'])->name('kategori.lihatkategori');
+
+Route::post('/kategori/lihatkategori', [KategoriController::class, 'store'])->name('kategori.store');
+
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
+
+Route::put('/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+
+Route::delete('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return redirect('/superadmin/dashboard');
@@ -75,25 +89,21 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
 
-// Route untuk SuperAdmin
-Route::prefix('superadmin')->group(function () {
-    // Tampilkan daftar admin
-    Route::get('/', [SuperadminController::class, 'index'])->name('superadmin.lihatadmin');
 
-    // Form tambah admin baru
-    Route::get('/create', function () {
-        return view('adminumkm/lihat.adminumkm'); // Pastikan view `create.blade.php` ada di folder `resources/views/superadmin`
-    })->name('adminumkm/lihatumkm');
-
-    // Simpan admin baru
-    Route::post('/store', [SuperadminController::class, 'store'])->name('superadmin.store');
-
-    // Form edit admin
-    Route::get('/edit/{id}', [SuperadminController::class, 'edit'])->name('superadmin.edit');
-
-    // Update admin
-    Route::post('/update/{id}', [SuperadminController::class, 'update'])->name('superadmin.update');
-
-    // Hapus admin
-    Route::get('/delete/{id}', [SuperadminController::class, 'destroy'])->name('superadmin.delete');
+Route::get('/superadmin/lihatsuperadmin', function () {
+    return view('superadmin.lihatsuperadmin'); 
 });
+
+Route::get('/superadmin/lihatsuperadmin', [SuperadminController::class, 'index'])->name('superadmin.lihatsuperadmin');
+
+  // Simpan admin baru
+Route::post('/superadmin/lihatsuperadmin', [SuperadminController::class, 'store'])->name('superadmin.store');
+
+  // Form edit admin
+Route::get('superadmin/edit/{id}', [SuperadminController::class, 'edit'])->name('superadmin.edit');
+
+  // Update admin
+Route::post('superadmin/update/{id}', [SuperadminController::class, 'update'])->name('superadmin.update');
+
+  // Hapus admin
+Route::get('superadmin/delete/{id}', [SuperadminController::class, 'destroy'])->name('superadmin.delete');

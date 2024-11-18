@@ -24,7 +24,11 @@ class SesiController extends Controller
             'email'=>$request->email,
             'password'=>$request->password
         ];
-        
+
+        if(Auth::attempt($infologin)){
+            return redirect('/superadmin/dashboard');
+        }else{
+            return redirect('/login')->withErrors('email dan password yang dimasukkan tidak sesuai')->withInput();
 
         if (Auth::attempt($infologin)) {
             // Cek level pengguna setelah login
@@ -39,7 +43,7 @@ class SesiController extends Controller
         }
     }
 
-    public function logout()
+    function logout()
     {
         Auth::logout();
         request()->session()->invalidate(); 
@@ -47,4 +51,5 @@ class SesiController extends Controller
 
         return redirect('/login');
     }
+}
 }

@@ -32,7 +32,6 @@ class ProdukController extends Controller
         error_log($request->status);
         
         $request->validate([
-            'id_produk' => 'required|unique:products,id_produk',
             'id_produk' => 'required|unique:ms_produk,id_produk',
             'id_user' => 'required|integer',
             'id_kategori' => 'required|integer',
