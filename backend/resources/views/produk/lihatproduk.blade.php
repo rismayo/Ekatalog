@@ -41,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($produk as $index => $produk)
+                @foreach ($product as $index => $product)
                 <tr class="text-center align-middle">
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $product->id_produk }}</td>
@@ -59,11 +59,9 @@
                             @endif
                             <td>
                                 <a href="{{ route('produk.edit', $product->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('produk.destroy', $product->id_produk) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</button>
-                                </form>
+                                <a href="{{ route('umkm.delete', $umkm->id_umkm) }}" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
+                                @csrf
+                                @method('DELETE')
                             </td>
                         </tr>
                     @endforeach

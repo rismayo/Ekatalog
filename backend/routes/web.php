@@ -38,7 +38,7 @@ Route::get('/produk/edit/{id}', [ProdukController::class, 'edit'])->name('produk
 
 Route::put('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
 
-Route::delete('/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+Route::get('/produk/delete/{id}', [ProdukController::class, 'delete'])->name('produk.delete');
 
 Route::get('/superadmin/lihatsuperadmin', function () {
     return view('superadmin.lihatsuperadmin'); 
@@ -55,7 +55,7 @@ Route::get('/umkm/edit/{id}', [UmkmController::class, 'edit'])->name('umkm.edit'
 
 Route::put('/umkm/update/{id}', [UmkmController::class, 'update'])->name('umkm.update');
 
-Route::delete('/umkm/delete/{id}', [UmkmController::class, 'destroy'])->name('umkm.destroy');
+Route::get('/umkm/delete/{id}', [UmkmController::class, 'delete'])->name('umkm.delete');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
