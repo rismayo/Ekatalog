@@ -70,7 +70,11 @@
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
+                @foreach ($product as $index => $product)
+=======
                 @foreach ($products as $index => $produk)
+>>>>>>> 25d1e2da365ab8e9f2bd2219bf841ca053997287
                 <tr class="text-center align-middle">
                     <td>{{ $produk->id_produk }}</td>
                     <td>{{ $produk->id_umkm }}</td>
@@ -85,7 +89,11 @@
                                 Tidak ada foto
                             @endif
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProdukModal" onclick="loadProdukData({{ $produk->id_produk }})">Edit</a>
+                                <a href="{{ route('produk.edit', $product->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('umkm.delete', $umkm->id_umkm) }}" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
+                                @csrf
+                                @method('DELETE')
+                                <a href="{{ route('produk.edit', $produk->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('produk.destroy', $produk->id_produk) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

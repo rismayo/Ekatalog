@@ -108,14 +108,6 @@
                             </div>
                         </div>
 
-                        <!-- Password -->
-                        <div class="mb-3 row">
-                            <label for="password" class="col-sm-4 col-form-label">Password</label>
-                            <div class="col-sm-8">
-                                <input type="password" class="form-control" name='password' id="password" required>
-                            </div>
-                        </div>
-
                         <!-- Level (Admin/Superadmin) -->
                         <div class="mb-3 row">
                             <label for="level" class="col-sm-4 col-form-label">Level</label>

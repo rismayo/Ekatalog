@@ -102,11 +102,10 @@ class ProdukController extends Controller
         return redirect()->route('produk.lihatproduk')->with('success', 'Data produk berhasil diperbarui');
         }
     // Delete Product record
-    public function destroy($id)
+    public function delete($id)
     {
-        $product = Produk::findOrFail($id);
-        $product->delete();
-
-        return redirect()->route('produk.lihatproduk')->with('success', 'Data produk berhasil dihapus');
+        error_log('test');
+        $test = Produk::where('id_umkm', $id)->delete();
+        return redirect()->route('produk.lihatproduk')->with('success', 'Data UMKM berhasil dihapus');
     }
 }

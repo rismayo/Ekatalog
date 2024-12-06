@@ -49,7 +49,6 @@ class UmkmController extends Controller
             error_log($th->getMessage());
         }
 
-       
     
         // Redirect dengan pesan sukses
         return redirect()->route('umkm.lihatumkm')->with('success', 'Data UMKM berhasil ditambahkan');
@@ -58,30 +57,28 @@ class UmkmController extends Controller
     // Edit UMKM record
     public function edit($id)
     {
-        $umkmEdit = Umkm::findOrFail($id); // Ambil data UMKM berdasarkan ID
-        
+        $umkm = Umkm::findOrFail($id); // Ambil data UMKM berdasarkan ID
+        return view('umkm.edit', ['umkm' => $umkm]);
     }
 
     // Update UMKM record
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_umkm' => 'required',
-            'pemilik' => 'required',
-            'alamat_umkm' => 'required',
-            'no_HP' => 'required|numeric',
-        ]);
+        $umkm = Umkm::findOrFail($id);
+        $umkm -> nama_umkm = $request->input('nama_umkm');
+        $umkm -> pemilik = $request->input('pemilik');
+        $umkm -> alamat_umkm = $request->input('alamat_umkm');
+        $umkm -> no_hp = $request->input('no_hp');
+        $umkm->save();
 
-        $umkms = umkm::findOrFail($id);
-        $umkms->update($request->all());
-        return redirect()->route('umkm.lihatumkm')->with('success', 'Data UMKM berhasil diperbarui');
+        return redirect('umkm.lihatumkm')->with('success', 'Data UMKM berhasil diperbarui');
     }
 
     // Delete UMKM record
-    public function destroy($id)
+    public function delete($id)
     {
-        $umkms = umkm::findOrFail($id);
-        $umkms->delete();
+        error_log('test');
+        $test = Umkm::where('id_umkm', $id)->delete();
         return redirect()->route('umkm.lihatumkm')->with('success', 'Data UMKM berhasil dihapus');
     }
 }
