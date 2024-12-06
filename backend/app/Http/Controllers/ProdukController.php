@@ -73,33 +73,29 @@ class ProdukController extends Controller
      // Edit UMKM record
      public function edit($id)
      {
-         $produkEdit = Produk::findOrFail($id); // Ambil data produk berdasarkan ID
+        $produkEdit = Produk::findOrFail($id); // Ambil data produk berdasarkan ID
          
          // Kirim data ke view untuk form edit
-        return view('produk.edit', compact('productEdit'));
+        return response()->json($produkEdit);
      }
  
       // Update Product record
      public function update(Request $request, $id)
      {
         $request->validate([
-            'id_user' => 'required|integer',
-            'id_kategori' => 'required|integer',
-            'id_umkm' => 'required|integer',
             'nama_produk' => 'required|string|max:255',
             'deskripsi_produk' => 'required|string',
             'harga_produk' => 'required|numeric',
-            'foto_produk' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'status' => 'required|in:aktif,tidakaktif',
         ]);
 
         $product = Produk::findOrFail($id);
 
         // Upload foto baru jika ada
-        if ($request->hasFile('foto_produk')) {
-            $foto_produk = $request->file('foto_produk')->store('foto_produk');
-            $request->merge(['foto_produk' => $foto_produk]);
-        }
+        //if ($request->hasFile('foto_produk')) {
+            //$foto_produk = $request->file('foto_produk')->store('foto_produk');
+            //$request->merge(['foto_produk' => $foto_produk]);
+        //}
         
         $product->update($request->all());
 

@@ -31,9 +31,9 @@
             <table class="table table-striped table-bordered">
                 <thead class="text-center">
                     <tr>
-                        <th>Id UMKM</th>
-                        <th>Nama UMKM</th>
-                        <th>Email</th>
+                        <th>ID</th>
+                        <th>UMKM</th>
+                        <th>Pemilik</th>
                         <th>Alamat</th>
                         <th>Nomor HP</th>
                         <th>Aksi</th>

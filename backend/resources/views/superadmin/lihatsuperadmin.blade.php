@@ -34,7 +34,6 @@
                         <th>Id UMKM</th>
                         <th>Nama User</th>
                         <th>Email</th>
-                        <th>Password</th>
                         <th>Level</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -43,15 +42,15 @@
                 <tbody>
                 @foreach ($superadmin as $index => $superadmin)
                     <tr class="text-center align-middle">
-                        <td>{{ $admin->id_user }}</td>
-                        <td>{{ $admin->id_umkm }}</td>
-                        <td>{{ $admin->nama_user }}</td>
-                        <td>{{ $admin->email }}</td>
-                        <td>{{ $admin->level }}</td>
-                        <td>{{ $admin->status}}</td>
+                        <td>{{ $superadmin->id_user }}</td>
+                        <td>{{ $superadmin->id_umkm }}</td>
+                        <td>{{ $superadmin->nama_user }}</td>
+                        <td>{{ $superadmin->email }}</td>
+                        <td>{{ $superadmin->level }}</td>
+                        <td>{{ $superadmin->status}}</td>
                         <td>
-                            <a href="{{ route('superadmin.edit', $admin->id_user) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('superadmin.destroy', $admin->id_user) }}" method="POST" style="display:inline-block;">
+                            <a href="{{ route('superadmin.edit', $superadmin->id_user) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('superadmin.delete', $superadmin->id_user) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
