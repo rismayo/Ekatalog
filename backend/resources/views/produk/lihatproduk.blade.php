@@ -5,6 +5,37 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/TYkiZhlZB6+fzT" crossorigin="anonymous">
 @endpush
 
+<script>
+    // Reset form saat modal ditutup
+    function resetForm() {
+        document.getElementById('addDataForm').reset();
+    }
+
+    // Fungsi untuk memuat data ke dalam modal edit
+    function loadProductData(id) {
+        console.log('halo')
+        fetch(`/products/edit/${id}`) // URL endpoint untuk mendapatkan data produk
+            .then(response => response.json()) // Mengambil data produk dalam format JSON
+            .then(data => {
+                // Isi form modal dengan data yang diterima
+                console.log(data)
+                document.getElementById('edit_nama_produk').value = data.nama_produk;
+                document.getElementById('edit_deskripsi_produk').value = data.deskripsi_produk;
+                document.getElementById('edit_harga_produk').value = data.harga_produk;
+                document.getElementById('edit_status').value = data.status;
+                
+                // Atur action form untuk pengiriman data saat submit
+                const form = document.getElementById('editDataForm');
+                form.action = `/products/${data.id}/update`; // Update URL untuk form submit
+            })
+            .catch(error => {
+                console.error('Terjadi kesalahan saat memuat data produk:', error);
+                alert('Gagal memuat data produk.');
+            });
+    }
+
+</script>
+
 @section('content')
 <main class="container bg-light mt-3">
     <!-- START DATA -->
@@ -54,8 +85,6 @@
                                 Tidak ada foto
                             @endif
                             <td>
-                                <a href="{{ route('produk.edit', $produk->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="{{ route('produk.delete', $produk->id_produk) }}" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
                                 @csrf
                                 @method('DELETE')
                             </td>
@@ -147,95 +176,6 @@
     </div>
     <!-- End Modal Tambah Data -->
 
-    
-    <!-- Modal EDIT Data -->
-    <div class="modal fade" id="editDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="tambahDataModalLabel">Edit Data Produk</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- FORM TAMBAH DATA -->
-                    <form id="editDataForm" action="{{ route('produk.update', $produk->id_produk) }}" method="PUT">
-                        @csrf
-                        <!-- ID Produk -->
-                        <div class="mb-3 row">
-                            <label for="id_produk" class="col-sm-4 col-form-label">ID Produk</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name='id_produk' id="id_produk" value="{{ $produk->id_produk }}" required>
-                            </div>
-                        </div>
-                         <!-- ID User -->
-                         <div class="mb-3 row">
-                            <label for="id_user" class="col-sm-4 col-form-label">ID User</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name='id_user' id="id_user" value="{{ $produk->id_user }}" required>
-                            </div>
-                        </div>
-                         <!-- ID Kategori -->
-                         <div class="mb-3 row">
-                            <label for="id_kategori" class="col-sm-4 col-form-label">ID Kategori</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name='id_kategori' id="id_kategori" value="{{ $produk->id_kategori }}" required>
-                            </div>
-                        </div>
-                         <!-- ID UMKM -->
-                         <div class="mb-3 row">
-                            <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name='id_umkm' id="id_umkm" value="{{ $produk->id_umkm }}" required>
-                            </div>
-                        </div>
-                        <!-- Nama Produk -->
-                        <div class="mb-3 row">
-                            <label for="nama_produk" class="col-sm-4 col-form-label">Nama Produk</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama_produk" id="nama_produk" value="{{ $produk->nama_produk }}" required>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Deskripsi Produk -->
-                    <div class="mb-3 row">
-                        <label for="deskripsi_produk" class="col-sm-4 col-form-label">Deskripsi Produk</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="deskripsi_produk" id="deskripsi_produk" value="{{ $produk->deskripsi_produk }}" required>
-                        </div>
-                    </div>
-                        <!-- Harga Produk -->
-                        <div class="mb-3 row">
-                            <label for="harga_produk" class="col-sm-4 col-form-label">Harga Produk</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="harga_produk" id="harga_produk"value="{{ $produk->harga_produk }}" required>
-                            </div>
-                        </div>
-                        <!-- Foto Produk -->
-                        <div class="mb-3 row">
-                            <label for="foto_produk" class="col-sm-4 col-form-label">Foto Produk</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="foto_produk" id="foto_produk" value="{{ $produk->foto_produk }}" required>
-                            </div>
-                        </div>
-                        <!-- Status -->
-                        <div class="mb-3 row">
-                            <label for="status" class="col-sm-4 col-form-label">Status</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="status" id="status" value="{{ $produk->status }}" required>
-                            </div>
-                        </div>
-                        <!-- Submit Buttons -->
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-default me-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">BATAL</button>
-                            <button type="submit" class="btn btn-primary">SIMPAN</button>
-                        </div>
-                    </form>
-                    <!-- AKHIR FORM -->
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal Konfirmasi Batal -->
     <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -261,10 +201,7 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-<script>
-    function resetForm() {
-        document.getElementById('addDataForm').reset();
-    }
-</script>
+
+
 @endpush
 @endsection
