@@ -109,7 +109,7 @@ class ProdukController extends Controller
     public function delete($id)
     {
         error_log('test');
-        $test = Produk::where('id_umkm', $id)->delete();
+        $test = Produk::where('id_produk', $id)->delete();
         return redirect()->route('produk.lihatproduk')->with('success', 'Data UMKM berhasil dihapus');
     }
 }

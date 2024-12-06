@@ -52,10 +52,6 @@
                         @csrf
                         @method('POST')
                         <a href="{{ route('umkm.delete', $umkm->id_umkm) }}" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
-                        @csrf
-                        @method('DELETE')
-                        <a href="{{ route('umkm.edit', $umkm->id_umkm) }}" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#tambahDataModal" >Edit</a>
-                        <a href="{{ route('umkm.destroy', $umkm->id_umkm) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
                     </td>
                 </tr>
             @endforeach
