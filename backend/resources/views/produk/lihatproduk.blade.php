@@ -5,6 +5,37 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/TYkiZhlZB6+fzT" crossorigin="anonymous">
 @endpush
 
+<script>
+    // Reset form saat modal ditutup
+    function resetForm() {
+        document.getElementById('addDataForm').reset();
+    }
+
+    // Fungsi untuk memuat data ke dalam modal edit
+    function loadProductData(id) {
+        console.log('halo')
+        fetch(`/products/edit/${id}`) // URL endpoint untuk mendapatkan data produk
+            .then(response => response.json()) // Mengambil data produk dalam format JSON
+            .then(data => {
+                // Isi form modal dengan data yang diterima
+                console.log(data)
+                document.getElementById('edit_nama_produk').value = data.nama_produk;
+                document.getElementById('edit_deskripsi_produk').value = data.deskripsi_produk;
+                document.getElementById('edit_harga_produk').value = data.harga_produk;
+                document.getElementById('edit_status').value = data.status;
+                
+                // Atur action form untuk pengiriman data saat submit
+                const form = document.getElementById('editDataForm');
+                form.action = `/products/${data.id}/update`; // Update URL untuk form submit
+            })
+            .catch(error => {
+                console.error('Terjadi kesalahan saat memuat data produk:', error);
+                alert('Gagal memuat data produk.');
+            });
+    }
+
+</script>
+
 @section('content')
 <main class="container bg-light mt-3">
     <!-- START DATA -->
@@ -39,11 +70,7 @@
                     </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
-                @foreach ($product as $index => $product)
-=======
                 @foreach ($products as $index => $produk)
->>>>>>> 25d1e2da365ab8e9f2bd2219bf841ca053997287
                 <tr class="text-center align-middle">
                     <td>{{ $produk->id_produk }}</td>
                     <td>{{ $produk->id_umkm }}</td>
@@ -58,8 +85,6 @@
                                 Tidak ada foto
                             @endif
                             <td>
-                                <a href="{{ route('produk.edit', $product->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="{{ route('umkm.delete', $umkm->id_umkm) }}" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
                                 @csrf
                                 @method('DELETE')
                                 <a href="{{ route('produk.edit', $produk->id_produk) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -156,6 +181,45 @@
         </div>
     </div>
     <!-- End Modal Tambah Data -->
+    
+    <!-- Modal Edit Produk -->
+    <div class="modal fade" id="editProdukModal" tabindex="-1" aria-labelledby="editProdukModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProdukModalLabel">Edit Data Produk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editDataForm" action="#" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label for="edit_nama_produk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" id="edit_nama_produk" name="nama_produk">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_deskripsi_produk" class="form-label">Deskripsi Produk</label>
+                            <textarea class="form-control" id="edit_deskripsi_produk" name="deskripsi_produk"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_harga_produk" class="form-label">Harga Produk</label>
+                            <input type="text" class="form-control" id="edit_harga_produk" name="harga_produk">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_status" class="form-label">Status</label>
+                            <select class="form-select" id="edit_status" name="status">
+                                <option value="aktif">Aktif</option>
+                                <option value="tidakaktif">Tidak Aktif</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal Konfirmasi Batal -->
     <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
@@ -182,10 +246,7 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-<script>
-    function resetForm() {
-        document.getElementById('addDataForm').reset();
-    }
-</script>
+
+
 @endpush
 @endsection

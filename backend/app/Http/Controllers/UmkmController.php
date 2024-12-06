@@ -67,11 +67,11 @@ class UmkmController extends Controller
         $umkm = Umkm::findOrFail($id);
         $umkm -> nama_umkm = $request->input('nama_umkm');
         $umkm -> pemilik = $request->input('pemilik');
-        $umkm -> alamat_umkm = $request->input('alamat_umkm');
+        $umkm -> alamat_umkm = $request->input('alamat');
         $umkm -> no_hp = $request->input('no_hp');
         $umkm->save();
 
-        return redirect('umkm.lihatumkm')->with('success', 'Data UMKM berhasil diperbarui');
+        return redirect('/umkm/lihatumkm')->with('success', 'Data UMKM berhasil diperbarui');
     }
 
     // Delete UMKM record
