@@ -74,107 +74,95 @@
                         </div>
                         <a href="{{url('/hubungi-kami')}}" class="nav-item nav-link">Hubungi Kami</a>
                     </div>
-                    <div class="d-flex m-3 me-0">
-                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                    </div>
                 </div>
             </nav>
         </div>
     </div>
     <!-- Navbar End -->
 
-
-    <!-- Modal Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center">
-                    <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Search End -->
-
-
-    <!-- Single Page Header start -->
+    <!-- Single Page Header Start -->
     <div class="container-fluid page-header py-5">
         <h1 class="text-center text-white display-6">PANDHAWA SAKTI</h1>
         <ol class="breadcrumb justify-content-center mb-0">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Contact</li>
+            <li class="breadcrumb-item active text-white">Profile</li>
         </ol>
     </div>
     <!-- Single Page Header End -->
+   <!-- Profile Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="p-5 bg-light rounded">
+            <div class="row g-4">
+                <!-- Logo -->
+                <div class="col-lg-12 text-center">
+                    <img src="frontend\fruitables-1.0.0\img\pandhawa sakti.png" alt="Logo Pandhawa Sakti"
+                        class="img-fluid rounded-circle shadow mb-4"
+                        style="width: 300px; height: 300px; object-fit: cover;">
+                </div>
+                <!-- Deskripsi -->
+                <div class="col-lg-12">
+                    <div class="text-start">
+                        <h1 class="text-primary">Tentang Pandhawa Sakti</h1>
+                        <p>
+                            <strong>Pandhawa Sakti</strong> adalah paguyuban UMKM yang berpusat di Kecamatan Kawedanan, Kabupaten Magetan, Jawa Timur. Sebagai wadah kolaborasi bagi para pelaku Usaha Mikro, Kecil, dan Menengah (UMKM), Pandhawa Sakti hadir untuk menciptakan ekosistem yang mendukung pengembangan usaha, peningkatan daya saing, dan promosi produk lokal unggulan. Dengan fokus pada kolaborasi, inovasi, dan pemberdayaan, kami berkomitmen untuk mewujudkan kesejahteraan pelaku UMKM serta memberikan kontribusi positif bagi pembangunan ekonomi lokal. Mikro, Kecil, dan Menengah (UMKM) dalam mengembangkan usaha, meningkatkan daya saing, dan mempromosikan produk lokal unggulan melalui kolaborasi dan inovasi.
+                        </p>
+                        <h3 class="text-primary mt-4">Visi Pandhawa Sakti</h3>
+                        <p>Meningkatkan kesejahteraan dan daya saing pelaku UMKM melalui kolaborasi, inovasi, dan pengembangan produk lokal unggulan.</p>
 
-
-    <!-- Contact Start -->
-    <div class="container-fluid contact py-5">
-        <div class="container py-5">
-            <div class="p-5 bg-light rounded">
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="text-center mx-auto" style="max-width: 700px;">
-                            <h1 class="text-primary">PANDHAWA SAKTI</h1>
-                            <p class="mb-4">Pandhawa Sakti adalah sebuah paguyuban UMKM yang berlokasi di Kabupaten Magetan.
-                                Paguyuban ini dibentuk sebagai wadah kolaborasi bagi para pelaku Usaha Mikro, Kecil, dan Menengah (UMKM) di daerah tersebut untuk saling mendukung dalam mengembangkan usaha mereka.
-                                Pandhawa Sakti bertujuan memajukan perekonomian lokal, Pandhawa Sakti juga berperan aktif dalam memperluas jaringan pemasaran dan meningkatkan daya saing produk UMKM.
-
+                        <h3 class="text-primary mt-4">Misi Pandhawa Sakti</h3>
+                        <ul>
+                            <li><strong>Ekosistem Kolaboratif:</strong> Menciptakan lingkungan yang mendukung pertumbuhan UMKM.</li>
+                            <li><strong>Pelatihan dan Pendampingan:</strong> Memberikan edukasi untuk meningkatkan kapasitas pelaku usaha.</li>
+                            <li><strong>Akses Pasar:</strong> Memperluas promosi produk lokal baik offline maupun online.</li>
+                            <li><strong>Kemitraan Strategis:</strong> Menggalang kerja sama dengan pemerintah, swasta, dan komunitas.</li>
+                            <li><strong>Inovasi:</strong> Mendorong pengembangan produk berbasis kearifan lokal.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <!-- Informasi Kontak -->
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center p-4 rounded bg-white shadow-sm">
+                        <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4 class="text-primary mb-2">Alamat</h4>
+                            <p class="mb-0">Jln Raya Gorang Gareng - Lembeyan, Desa Tladan, Kawedanan, Magetan</p>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="h-100 rounded">
-                            <iframe class="rounded w-100"
-                                style="height: 400px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1694259649153!5m2!1sen!2sbd"
-                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center p-4 rounded bg-white shadow-sm">
+                        <i class="fas fa-envelope fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4 class="text-primary mb-2">Email</h4>
+                            <p class="mb-4">info@pandhawasakti.id</p>
                         </div>
                     </div>
-
-                    <div class="col-lg-5">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex p-4 rounded mb-4 bg-white me-3">
-                                <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Alamat</h4>
-                                    <p class="mb-2">Jln Raya Gorang gareng - Lembeyan Desa Tladan Kecamatan Kawedanan Kabupaten Magetan</p>
-                                </div>
-                            </div>
-                            <div class="d-flex p-4 rounded mb-4 bg-white me-3">
-                                <i class="fas fa-envelope fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Email</h4>
-                                    <p class="mb-2">info@example.com</p>
-                                </div>
-                            </div>
-                            <div class="d-flex p-4 rounded bg-white">
-                                <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Telephone</h4>
-                                    <p class="mb-2">(+62)857 3565 2666</p>
-                                </div>
-                            </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center p-4 rounded bg-white shadow-sm">
+                        <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4 class="text-primary mb-2">Telepon</h4>
+                            <p class="mb-4">(+62) 857 3565 2666</p>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    <!-- Contact End -->
+</div>
+<!-- Profile End -->
 
 
-   <!-- Footer Start -->
-   <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
         <div class="container py-5">
             <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
                 <div class="row g-4">
@@ -194,7 +182,7 @@
                         <a href="{{url('/profile')}}" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Selengkapnya</a>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6">   
+                <div class="col-lg-2 col-md-6">
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-item">
@@ -216,7 +204,7 @@
         </div>
     </div>
     <!-- Footer End -->
-     
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
