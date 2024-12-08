@@ -20,7 +20,7 @@
         
         <!-- TOMBOL TAMBAH DATA -->
         <div class="pb-3">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahDataModal">
                 + Tambah Data
             </button>
         </div>
@@ -30,8 +30,8 @@
             <table class="table table-striped table-bordered">
                 <thead class="text-center">
                     <tr>
-                        <th>Id User</th>
-                        <th>Id UMKM</th>
+                        <th>NO</th>
+                        <th>ID UMKM</th>
                         <th>Nama User</th>
                         <th>Email</th>
                         <th>Level</th>
@@ -42,7 +42,7 @@
                 <tbody>
                 @foreach ($superadmins as $index => $superadmin)
                     <tr class="text-center align-middle">
-                        <td>{{ $superadmin->id_user }}</td>
+                        <td>{{ $index + 1}}</td> 
                         <td>{{ $superadmin->id_umkm }}</td>
                         <td>{{ $superadmin->nama_user }}</td>
                         <td>{{ $superadmin->email }}</td>
@@ -64,26 +64,18 @@
     </div>
     <!-- AKHIR DATA -->
 
-    <!-- Modal Tambah Data -->
-    <div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
+     <!-- Modal Tambah Data -->
+    <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addDataModalLabel">Tambah Data Admin</h5>
+                    <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Admin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- START FORM --> 
-                    <form id="addDataForm" action='{{ route('superadmin.store') }}' method='post' onsubmit="showSuccessModal(event)">
+                    <!-- FORM TAMBAH DATA -->
+                    <form id="addDataForm" action="{{ route('superadmin.store') }}" method="POST">
                         @csrf
-                        <!-- ID User -->
-                        <div class="mb-3 row">
-                            <label for="id_user" class="col-sm-4 col-form-label">ID User</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name='id_user' id="id_user" required>
-                            </div>
-                        </div>
-
                         <!-- ID UMKM -->
                         <div class="mb-3 row">
                             <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
@@ -91,36 +83,32 @@
                                 <input type="number" class="form-control" name='id_umkm' id="id_umkm" required>
                             </div>
                         </div>
-
                         <!-- Nama User -->
                         <div class="mb-3 row">
                             <label for="nama_user" class="col-sm-4 col-form-label">Nama User</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name='nama_user' id="nama_user" required>
+                                <input type="text" class="form-control" name="nama_user" id="nama_user" required>
                             </div>
                         </div>
-
                         <!-- Email -->
                         <div class="mb-3 row">
                             <label for="email" class="col-sm-4 col-form-label">Email</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" name='email' id="email" required>
+                                <input type="text" class="form-control" name="email" id="email" required>
                             </div>
                         </div>
-
-                        <!-- Level (Admin/Superadmin) -->
+                       
+                        <!-- Level -->
                         <div class="mb-3 row">
                             <label for="level" class="col-sm-4 col-form-label">Level</label>
                             <div class="col-sm-8">
                                 <select class="form-select" name="level" id="level" required>
-                                    <option value="admin">Pengelola</option>
-                                    <option value="superadmin">Superadmin</option>
-                                    <option value="superadmin">Pemilik</option>
+                                    <option value="aktif">Superadmin</option>
+                                    <option value="tidak_aktif">Admin</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <!-- Status (Aktif/Tidak Aktif) -->
+                        </div>
+                        <!-- Status -->
                         <div class="mb-3 row">
                             <label for="status" class="col-sm-4 col-form-label">Status</label>
                             <div class="col-sm-8">
@@ -129,8 +117,7 @@
                                     <option value="tidak_aktif">Tidak Aktif</option>
                                 </select>
                             </div>
-                        </div>
-
+                        </div>
                         <!-- Submit Buttons -->
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-default me-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">BATAL</button>
@@ -142,7 +129,6 @@
             </div>
         </div>
     </div>
-    <!-- Akhir Modal Tambah Data -->
 
     <!-- Modal Konfirmasi Batal -->
     <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">

@@ -108,7 +108,11 @@ Route::post('/superadmin/lihatsuperadmin', [SuperadminController::class, 'store'
 Route::get('superadmin/edit/{id}', [SuperadminController::class, 'edit'])->name('superadmin.edit');
 
   // Update admin
-Route::post('superadmin/update/{id}', [SuperadminController::class, 'update'])->name('superadmin.update');
+Route::put('superadmin/update/{id}', [SuperadminController::class, 'update'])->name('superadmin.update');
 
   // Hapus admin
 Route::get('superadmin/delete/{id}', [SuperadminController::class, 'destroy'])->name('superadmin.delete');
+
+
+
+
