@@ -49,12 +49,12 @@
                     <td>{{ $umkm->no_hp }}</td>
                     <td>
                         <!-- Button trigger modal -->
-                        <a href="{{ route('umkm.edit', $umkm->id_umkm) }}" class="btn btn-warning btn-sm" data-bs-toggle="modal" method= "POST" data-bs-target="#editDataModal" >Edit</a>
+                        <a href="{{ route('umkm.edit', $umkm->id_umkm) }}" class="btn btn-warning btn-sm" data-bs-toggle="modal" method= "POST" data-bs-target="#editDataModal-{{$umkm->id_umkm}}" >Edit</a>
                         @csrf 
                         @method('PUT')
                         
                         <!-- Modal EDIT Data -->
-                        <div class="modal fade" id="editDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="editDataModal-{{$umkm->id_umkm}}" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -66,13 +66,7 @@
                                         <form id="editDataForm" action="{{ route('umkm.update', $umkm->id_umkm) }}" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <!-- ID UMKM -->
-                                            <div class="mb-3 row">
-                                                <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
-                                                <div class="col-sm-8">
-                                                    <input type="number" class="form-control" name='id_umkm' id="id_umkm" value="{{ $umkm->id_umkm }}" required>
-                                                </div>
-                                            </div>
+                                            
                                             <!-- Nama UMKM -->
                                             <div class="mb-3 row">
                                                 <label for="nama_user" class="col-sm-4 col-form-label">Nama UMKM</label>
@@ -113,9 +107,11 @@
                                 </div>
                             </div>
                         </div> 
-                        @csrf
-                        @method('DELETE')
-                        <a href="{{ route('umkm.destroy', $umkm->id_umkm) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
+                        <form action="{{ route('umkm.destroy', $umkm->id_umkm) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -137,13 +133,7 @@
                     <!-- FORM TAMBAH DATA -->
                     <form id="addDataForm" action="{{ route('umkm.store') }}" method="POST">
                         @csrf
-                        <!-- ID UMKM -->
-                        <div class="mb-3 row">
-                            <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name='id_umkm' id="id_umkm" required>
-                            </div>
-                        </div>
+                       
                         <!-- Nama UMKM -->
                         <div class="mb-3 row">
                             <label for="nama_user" class="col-sm-4 col-form-label">Nama UMKM</label>
