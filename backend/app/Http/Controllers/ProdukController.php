@@ -102,7 +102,7 @@ class ProdukController extends Controller
         return redirect()->route('produk.lihatproduk')->with('success', 'Data produk berhasil diperbarui');
         }
     // Delete Product record
-    public function delete($id)
+    public function destroy($id)
     {
         error_log('test');
         $test = Produk::where('id_produk', $id)->delete();
