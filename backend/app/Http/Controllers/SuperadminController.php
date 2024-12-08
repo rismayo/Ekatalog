@@ -80,11 +80,10 @@ class SuperadminController extends Controller
         return redirect()->route('superadmin.lihatsuperadmin')->with('success', 'Data Admin berhasil diperbarui');
         }
     // Delete Product record
-    public function destroy($id)
+    public function delete($id)
     {
-        $superadmin = Superadmin::findOrFail($id);
-        $superadmin->delete();
-
-        return redirect()->route('superadmin.lihatsuperadmin')->with('success', 'Data Admin berhasil dihapus');
+        error_log('test');
+        $test = SuperAdmin::where('id_user', $id)->delete();
+        return redirect()->route('superadmin.lihatsuperadmin')->with('success', 'Data SuperAdmin berhasil dihapus');
     }
 }

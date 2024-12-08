@@ -158,17 +158,17 @@
                             </li>
                             <li class="nav-item">
                                 <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
-                                    <span class="text-dark" style="width: 130px;">Vegetables</span>
+                                    <span class="text-dark" style="width: 130px;">Makanan</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
-                                    <span class="text-dark" style="width: 130px;">Fruits</span>
+                                    <span class="text-dark" style="width: 130px;">Minuman</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
-                                    <span class="text-dark" style="width: 130px;">Bread</span>
+                                    <span class="text-dark" style="width: 130px;">Kerajinan</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -619,9 +619,7 @@
         </div>
     </div>
     <!-- Vesitable Shop End -->
-
-
-
+     
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
         <div class="container py-5">

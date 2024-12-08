@@ -84,3 +84,4 @@ class UmkmController extends Controller
         return redirect()->route('umkm.lihatumkm')->with('success', 'Data UMKM berhasil dihapus');
     }
 }
+
