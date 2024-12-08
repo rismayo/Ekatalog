@@ -2,110 +2,132 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\Umkm;
+use App\Models\Superadmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
-    // // Display the list of UMKM
     public function index(Request $request)
     {
-         // Ambil data dari tabel `umkms`
-         $products = Produk::all(); // Pastikan nama variabelnya `$umkms`
-        
-         // Kirim data ke view dengan `compact('product')`
-         return view('produk.lihatproduk', compact('products'));
+         $products = Produk::with('kategori', 'umkm', 'superadmin')->get();
+         $kategori = Kategori::all();
+         $umkms = Umkm::all();
+         $superadmin = Superadmin::all();
+         return view('produk.lihatproduk', compact('products', 'kategori', 'umkms', 'superadmin'));
     }
 
-     // Store a new UMKM record
+    public function create()
+    {
+        $kategori = Kategori::all();
+        $umkms = Umkm::all();
+        $superadmin = Superadmin::all();
+        return view('produk.lihatproduk', compact('kategori', 'umkms', 'superadmin'));
+    }
+
      public function store(Request $request)
      {
-        error_log($request->id_produk);
-        error_log($request->id_user);
-        error_log($request->id_kategori);
-        error_log($request->id_umkm);
-        error_log($request->nama_produk);
-        error_log($request->deskripsi_produk);
-        error_log($request->harga_produk);
-        error_log($request->foto_produk);
-        error_log($request->status);
         
         $request->validate([
-            'id_produk' => 'required|unique:ms_produk,id_produk',
-            'id_user' => 'required|integer',
-            'id_kategori' => 'required|integer',
-            'id_umkm' => 'required|integer',
+            'id_user' => 'required|exists:ms_user,id_user',
+            'id_kategori' => 'required|exists:ms_kategori,id_kategori',
+            'id_umkm' => 'required|exists:ms_umkm,id_umkm',
             'nama_produk' => 'required|string|max:255',
             'deskripsi_produk' => 'required|string',
             'harga_produk' => 'required|numeric',
             'foto_produk' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'status' => 'required|in:aktif,tidakaktif',
         ]);
- 
-        try {
-            // Upload foto jika ada
-            $foto_produk = null;
-            if ($request->hasFile('foto_produk')) {
-                $foto_produk = $request->file('foto_produk')->store('foto_produk');
-            }
 
-            // Simpan data produk
-            Produk::create([
-                'id_produk' => $request->id_produk,
-                'id_user' => $request->id_user,
-                'id_kategori' => $request->id_kategori,
-                'id_umkm' => $request->id_umkm,
-                'nama_produk' => $request->nama_produk,
-                'deskripsi_produk' => $request->deskripsi_produk,
-                'harga_produk' => $request->harga_produk,
-                'foto_produk' => $foto_produk,
-                'status' => $request->status,
-            ]);
-        } catch (\Throwable $th) {
-            error_log($th->getMessage());
+        $foto_produk = null;
+        if ($request->hasFile('foto_produk')) {
+            $file = $request->file('foto_produk');
+
+            // Membuat nama file unik dan memotong jika terlalu panjang
+            $randomName = substr(uniqid('produk_', true), 0, 20) . '.' . $file->getClientOriginalExtension(); // Membatasi panjang menjadi 20 karakter
+
+            // Tentukan direktori penyimpanan
+            $file->storeAs('foto_produk', $randomName, 'public');
+
+            // Simpan path relatif
+            $foto_produk = 'foto_produk/' . $randomName;
         }
-        
-         // Redirect dengan pesan sukses
+
+        Produk::create([
+            'id_user' => $request->id_user,
+            'id_kategori' => $request->id_kategori,
+            'id_umkm' => $request->id_umkm,
+            'nama_produk' => $request->nama_produk,
+            'deskripsi_produk' => $request->deskripsi_produk,
+            'harga_produk' => $request->harga_produk,
+            'foto_produk' => $foto_produk,
+            'status' => $request->status,
+        ]);
+
          return redirect()->route('produk.lihatproduk')->with('success', 'Data produk berhasil ditambahkan');
      }
  
      // Edit UMKM record
      public function edit($id)
      {
-        $produkEdit = Produk::findOrFail($id); // Ambil data produk berdasarkan ID
-         
-         // Kirim data ke view untuk form edit
-        return response()->json($produkEdit);
+        $produk = Produk::findOrFail($id);
+        $kategori = Kategori::all();
+        $umkms = Umkm::all(); // Ambil data produk berdasarkan ID
+        $superadmin = Superadmin::all();
+        return view('produk.edit', compact('produk', 'kategori', 'umkms', 'superadmin'));
      }
  
       // Update Product record
      public function update(Request $request, $id)
      {
+
         $request->validate([
+            'id_user' => 'required|exists:ms_user,id_user',
+            'id_kategori' => 'required|exists:ms_kategori,id_kategori',
+            'id_umkm' => 'required|exists:ms_umkm,id_umkm',
             'nama_produk' => 'required|string|max:255',
             'deskripsi_produk' => 'required|string',
             'harga_produk' => 'required|numeric',
+            'foto_produk' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'status' => 'required|in:aktif,tidakaktif',
         ]);
 
         $product = Produk::findOrFail($id);
+        $product -> id_user = $request->input('id_user');
+        $product -> id_kategori = $request->input('id_kategori');
+        $product -> id_umkm = $request->input('id_umkm');
+        $product -> nama_produk = $request->input('nama_produk');
+        $product -> deskripsi_produk = $request->input('deskripsi_produk');
+        $product -> harga_produk = $request->input('harga_produk');
+        $product -> foto_produk = $request->input('foto_produk');
+        $product -> status = $request->input('status');
 
-        // Upload foto baru jika ada
-        //if ($request->hasFile('foto_produk')) {
-            //$foto_produk = $request->file('foto_produk')->store('foto_produk');
-            //$request->merge(['foto_produk' => $foto_produk]);
-        //}
-        
-        $product->update($request->all());
+        // Memeriksa jika foto produk diupload
+        if ($request->hasFile('foto_produk')) {
+            // Menghapus foto lama jika ada
+            if ($product->foto_produk && file_exists(storage_path('app/public/' . $product->foto_produk))) {
+                unlink(storage_path('app/public/' . $product->foto_produk)); // Hapus foto lama
+            }
 
-        return redirect()->route('produk.lihatproduk')->with('success', 'Data produk berhasil diperbarui');
+            // Menyimpan foto produk baru
+            $file = $request->file('foto_produk');
+            $randomName = substr(uniqid('produk_', true), 0, 20) . '.' . $file->getClientOriginalExtension(); // Membuat nama unik
+            $file->storeAs('foto_produk', $randomName, 'public'); // Menyimpan file ke storage
+
+            // Menyimpan path relatif foto produk
+            $product->foto_produk = 'foto_produk/' . $randomName;
         }
+        $product->save();
+        return redirect()->route('produk.lihatproduk')->with('success', 'Data Produk berhasil diperbarui');
+    }
     // Delete Product record
     public function destroy($id)
     {
-        error_log('test');
-        $test = Produk::where('id_produk', $id)->delete();
-        return redirect()->route('produk.lihatproduk')->with('success', 'Data UMKM berhasil dihapus');
+        $product = Produk::findOrFail($id); // Cari data berdasarkan ID
+        $product->delete(); // Hapus data
+        return redirect()->route('produk.lihatproduk')->with('success', 'Data Produk berhasil dihapus');
     }
 }

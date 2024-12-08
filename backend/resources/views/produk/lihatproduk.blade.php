@@ -27,295 +27,154 @@
                     Tambah Data</button>
             </div>
 
-            <!-- TABEL PRODUK -->
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Id Produk</th>
-                            <th>Id UMKM</th>
-                            <th>Nama</th>
-                            <th>Deskripsi</th>
-                            <th>Status</th>
-                            <th>Harga</th>
-                            <th>Foto</th>
-                            <th>Aksi</th>
+        <!-- TABEL PRODUK -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="text-center">
+                    <tr>
+                        <th>Id Produk</th>
+                        <th>Id UMKM</th>
+                        <th>Nama</th>
+                        <th>Deskripsi</th>
+                        <th>Status</th>
+                        <th>Harga</th>
+                        <th>Foto</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($products as $index => $produk)
+                <tr class="text-center align-middle">
+                    <td>{{ $produk->id_produk }}</td>
+                    <td>{{ $produk->id_umkm }}</td>
+                    <td>{{ $produk->nama_produk }}</td>
+                    <td>{{ $produk->deskripsi_produk }}</td>
+                    <td>{{ $produk->status }}</td>
+                    <td>{{ number_format($produk->harga_produk, 0, ',', '.') }}</td>
+                    <td>
+                        @if ($produk->foto_produk)
+                                <img src="{{ asset('storage/' . $produk->foto_produk) }}" alt="Foto Produk" width="50">
+                            @else
+                                Tidak ada foto
+                            @endif
+                            <td>
+                                @csrf
+                                @method('DELETE')
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($products as $index => $produk)
-                            <tr class="text-center align-middle">
-                                <td>{{ $produk->id_produk }}</td>
-                                <td>{{ $produk->id_umkm }}</td>
-                                <td>{{ $produk->nama_produk }}</td>
-                                <td>{{ $produk->deskripsi_produk }}</td>
-                                <td>{{ $produk->status }}</td>
-                                <td>{{ number_format($produk->harga_produk, 0, ',', '.') }}</td>
-                                <td>
-                                    @if ($produk->foto_produk)
-                                        <img src="{{ asset('storage/' . $produk->foto_produk) }}" alt="Foto Produk"
-                                            width="50">
-                                    @else
-                                        Tidak ada foto
-                                    @endif
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <a href="{{ route('produk.edit', $produk->id_produk) }}" class="btn btn-warning btn-sm"
-                                        data-bs-toggle="modal" method= "POST" data-bs-target="#editDataModal">Edit</a>
-                                    @csrf
-                                    @method('PUT')
-
-                                    <!-- Modal Tambah Data -->
-                                    <div class="modal fade" id="editDataModal-{{ $produk->id_produk }}" tabindex="-1"
-                                        aria-labelledby="tambahDataModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="tambahDataModalLabel">Edit Data UMKM</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <!-- FORM TAMBAH DATA -->
-                                                    <form id="editDataForm"
-                                                        action="{{ route('produk.update', $produk->id_produk) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-
-                                                        <!-- ID UMKM -->
-                                                        <div class="mb-3 row">
-                                                            <label for="id_produk" class="col-sm-4 col-form-label">ID
-                                                                Produk</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" class="form-control" name='id_produk'
-                                                                    id="id_produk"
-                                                                    value="{{ $produk->id_produk }}"required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="id_kategori" class="col-sm-4 col-form-label">ID
-                                                                Kategori</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" class="form-control"
-                                                                    name='id_kategori' id="id_kategori"
-                                                                    value="{{ $produk->id_kategori }}"required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="id_umkm" class="col-sm-4 col-form-label">ID
-                                                                UMKM</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" class="form-control" name='id_umkm'
-                                                                    id="id_umkm" value="{{ $produk->id_umkm }}"required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="nama_produk" class="col-sm-4 col-form-label">Nama
-                                                                Produk</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" class="form-control"
-                                                                    name='nama_produk' id="nama_produk"
-                                                                    value="{{ $produk->nama_produk }}"required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="deskripsi_produk"
-                                                                class="col-sm-4 col-form-label">Deskripsi Produk</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" class="form-control"
-                                                                    name='deskripsi_produk' id="deskripsi_produk"
-                                                                    value="{{ $produk->deskripsi_produk }}"required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="harga_produk"
-                                                                class="col-sm-4 col-form-label">Harga Produk</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" class="form-control"
-                                                                    name='harga_produk' id="harga_produk"
-                                                                    value="{{ $produk->harga_produk }}"required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="id_kategori" class="col-sm-4 col-form-label">Foto
-                                                                Produk</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" class="form-control"
-                                                                    name='foto_produk' id="foto_produk"
-                                                                    value="{{ $produk->foto_produk }}"required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="status"
-                                                                class="col-sm-4 col-form-label">Status</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" class="form-control" name='status'
-                                                                    id="status" value="{{ $produk->status }}"required>
-                                                                <select class="form-select" name="status"
-                                                                    id="status">
-                                                                    <option value="aktif">Aktif</option>
-                                                                    <option value="tidak_aktif">Tidak Aktif</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                            </div>
-                                            <!-- Submit Buttons -->
-                                            <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-default me-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#confirmCancelModal">BATAL</button>
-                                                <button type="submit" class="btn btn-primary">SIMPAN</button>
-                                            </div>
-                                            </form>
-                                            <!-- AKHIR FORM -->
-                                            </form>
-                                        </div>
-                                    </div>
-            </div>
-        </div>
-        @csrf
-        @method('DELETE')
-        <a href="{{ route('produk.destroy', $produk->id_produk) }}" class="btn btn-danger btn-sm"
-            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
-        </td>
-        </tr>
-        @endforeach
-        </tbody>
-        </table>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
         </div>
         <!-- AKHIR DATA -->
 
-        <!-- Modal Tambah Data -->
-        <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Produk</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="addDataForm" action="{{ route('produk.store') }}" method="POST">
-                            @csrf
-                            <div class="mb-3 row">
-                                <label for="id_produk" class="col-sm-4 col-form-label">Id Produk</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" name="id_produk" id="id_produk">
-                                </div>
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Produk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addDataForm" action="{{ route('produk.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3 row">
+                            <label for="id_produk" class="col-sm-4 col-form-label">Id Produk</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name="id_produk" id="id_produk">
                             </div>
-                            <div class="mb-3 row">
-                                <label for="id_user" class="col-sm-4 col-form-label">Id User</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="id_user" id="id_user">
-                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="id_user" class="col-sm-4 col-form-label">Id User</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="id_user" id="id_user">
                             </div>
-                            <div class="mb-3 row">
-                                <label for="id_kategori" class="col-sm-4 col-form-label">Id Kategori</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="id_kategori" id="id_kategori">
-                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="id_kategori" class="col-sm-4 col-form-label">Id Kategori</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="id_kategori" id="id_kategori">
                             </div>
-                            <div class="mb-3 row">
-                                <label for="id_umkm" class="col-sm-4 col-form-label">Id UMKM</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="id_umkm" id="id_umkm">
-                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="id_umkm" class="col-sm-4 col-form-label">Id UMKM</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="id_umkm" id="id_umkm">
                             </div>
-                            <div class="mb-3 row">
-                                <label for="nama_produk" class="col-sm-4 col-form-label">Nama Produk</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nama_produk" id="nama_produk">
-                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nama_produk" class="col-sm-4 col-form-label">Nama Produk</label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" name="nama_produk" id="nama_produk">
                             </div>
-                            <div class="mb-3 row">
-                                <label for="deskripsi_produk" class="col-sm-4 col-form-label">Deskripsi Produk</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="deskripsi_produk"
-                                        id="deskripsi_produk">
-                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="deskripsi_produk" class="col-sm-4 col-form-label">Deskripsi Produk</label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" name="deskripsi_produk" id="deskripsi_produk">
                             </div>
-                            <div class="mb-3 row">
-                                <label for="harga_produk" class="col-sm-4 col-form-label">Harga Produk</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="harga_produk" id="harga_produk">
-                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="harga_produk" class="col-sm-4 col-form-label">Harga Produk</label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" name="harga_produk" id="harga_produk">
                             </div>
-                            <div class="mb-3 row">
-                                <label for="foto_produk" class="col-sm-4 col-form-label">Foto Produk</label>
-                                <div class="col-sm-8">
-                                    <input type="file" class="form-control" name="foto_produk" id="foto_produk"
-                                        accept="image/*">
-                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="foto_produk" class="col-sm-4 col-form-label">Foto Produk</label>
+                            <div class="col-sm-8">
+                                <input type="file" class="form-control" name="foto_produk" id="foto_produk" accept="image/*">
                             </div>
-                            <div class="mb-3 row">
-                                <label for="status" class="col-sm-4 col-form-label">Status</label>
-                                <div class="col-sm-8">
-                                    <select class="form-select" name="status" id="status">
-                                        <option value="aktif">Aktif</option>
-                                        <option value="tidak_aktif">Tidak Aktif</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="status" class="col-sm-4 col-form-label">Status</label>
+                            <div class="col-sm-8">
+                                <select class="form-select" name="status" id="status">
+                                    <option value="aktif">Aktif</option>
+                                    <option value="tidak_aktif">Tidak Aktif</option>
+                                </select>
                             </div>
-                            <!-- Submit Buttons -->
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-default me-2" data-bs-toggle="modal"
-                                    data-bs-target="#confirmCancelModal">BATAL</button>
-                                <button type="submit" class="btn btn-primary">SIMPAN</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <!-- Submit Buttons -->
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-default me-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">BATAL</button>
+                            <button type="submit" class="btn btn-primary">SIMPAN</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- End Modal Tambah Data -->
+    </div>
+    <!-- End Modal Tambah Data -->
 
-
-        <!-- Modal Konfirmasi Batal -->
-        <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmCancelModalLabel">Konfirmasi Batal</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Apakah Anda yakin ingin membatalkan penambahan data?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="resetForm()">Ya,
-                            Batalkan</button>
-                    </div>
+    <!-- Modal Konfirmasi Batal -->
+    <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmCancelModalLabel">Konfirmasi Batal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin membatalkan penambahan data?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="resetForm()">Ya, Batalkan</button>
                 </div>
             </div>
         </div>
-        <!-- Akhir Modal Konfirmasi Batal -->
+    </div>
+    <!-- Akhir Modal Konfirmasi Batal -->
 
 
-    </main>
+</main>
 
-    <!-- JavaScript untuk Memicu Modal Jika $showModal True -->
-    @if (isset($showModal) && $showModal)
-        <script type="text/javascript">
-            document.addEventListener("DOMContentLoaded", function() {
-                var editDataModal = new bootstrap.Modal(document.getElementById("tambahDataModal"));
-                editDataModal.show();
-            });
-        </script>
-    @endif
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
-    @push('scripts')
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
-        </script>
-        <script>
-            function resetForm() {
-                document.getElementById('addDataForm').reset();
-            }
-        </script>
-    @endpush
+
+@endpush
 @endsection

@@ -31,8 +31,8 @@
             <table class="table table-striped table-bordered">
                 <thead class="text-center">
                     <tr>
-                        <th>Id Kategori</th>
-                        <th>Id UMKM</th>
+                        <th>NO</th>
+                        <th>Nama UMKM</th>
                         <th>Nama Kategori</th>
                         <th>Aksi</th>
                     </tr>
@@ -41,11 +41,66 @@
                 @foreach ($kategori as $index => $kategori)
                 <tr>
                     <td>{{ $index + 1}}</td>
-                    <td>{{ $kategori->id_umkm }}</td>
+                    <td>{{ $kategori->umkm->nama_umkm }}</td>
                     <td>{{ $kategori->nama_kategori }}</td>
                     <td>
-                        <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#tambahDataModal" >Edit</a>
-                        <a href="{{ route('kategori.destroy', $kategori->id_umkm) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</a>
+                        <a href="{{ route('kategori.edit', $kategori->id_kategori) }}" class="btn btn-warning btn-sm" data-bs-toggle="modal" method= "POST" data-bs-target="#editDataModal-{{$kategori->id_kategori}}" >Edit</a>
+                        @csrf 
+                        @method('PUT')
+                        
+                        <!-- Modal EDIT Data -->
+                        <div class="modal fade" id="editDataModal-{{$kategori->id_kategori}}" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="tambahDataModalLabel">Edit Data Kategori</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- FORM TAMBAH DATA -->
+                                        <form id="editDataForm" action="{{ route('kategori.update', $kategori->id_kategori) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            
+                                            <!-- ID UMKM -->
+                                            <div class="mb-3 row">
+                                                <label for="id_umkm" class="col-sm-4 col-form-label">Nama UMKM</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" name="id_umkm" id="id_umkm" required>
+                                                        <option value="" disabled>Pilih Nama UMKM</option>
+                                                        @if($umkms->isNotEmpty())
+                                                            @foreach ($umkms as $umkm)
+                                                                <option value="{{ $umkm->id_umkm }}" {{ $kategori->id_umkm == $umkm->id_umkm ? 'selected' : '' }}>
+                                                                    {{ $umkm->nama_umkm }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Nama Kategori -->
+                                            <div class="mb-3 row">
+                                                <label for="nama_user" class="col-sm-4 col-form-label">Nama Kategori</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="nama_kategori" id="nama_kategori" value="{{ $kategori->nama_kategori }}" required>
+                                                </div>
+                                            </div>
+                                            <!-- Submit Buttons -->
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-default me-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">BATAL</button>
+                                                <button type="submit" class="btn btn-primary">SIMPAN</button>
+                                            </div>
+                                        </form>
+                                        <!-- AKHIR FORM -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="{{ route('kategori.destroy', $kategori->id_kategori) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -67,20 +122,19 @@
                     <!-- FORM TAMBAH DATA -->
                     <form id="addDataForm" action="{{ route('kategori.store') }}" method="POST">
                         @csrf
-                        <!-- ID UMKM -->
-                        <div class="mb-3 row">
-                            <label for="id_umkm" class="col-sm-4 col-form-label">ID Kategori</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name='id_kategori' id="id_kategori" required>
-                            </div>
-                        </div>
+                        
                         <!-- Nama UMKM -->
                         <div class="mb-3 row">
-                            <label for="nama_user" class="col-sm-4 col-form-label">ID UMKM</label>
+                            <label for="id_umkm" class="col-sm-4 col-form-label">Nama UMKM</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="id_umkm" id="id_umkm" required>
+                                <select class="form-control" name="id_umkm" id="id_umkm" required>
+                                    <option value="" selected disabled>Pilih Nama UMKM</option>
+                                    @foreach ($umkms as $umkm)
+                                        <option value="{{ $umkm->id_umkm }}">{{ $umkm->nama_umkm }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                        </div>
+                        </div>                        
                         <!-- Nama UMKM -->
                         <div class="mb-3 row">
                             <label for="nama_user" class="col-sm-4 col-form-label">Nama Kategori</label>

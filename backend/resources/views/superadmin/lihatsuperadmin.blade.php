@@ -7,6 +7,24 @@
 @endpush
 
 @section('content')
+<main class="container bg-light mt-3">
+    <!-- START DATA -->
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <!-- FORM PENCARIAN -->
+        <div class="pb-3">
+            <form class="d-flex" action="" method="get">
+                @csrf
+                <input class="form-control me-1" type="search" name="katakunci" value="{{ Request::get('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
+                <button class="btn btn-secondary" type="submit">Cari</button>
+            </form>
+        </div>
+        
+        <!-- TOMBOL TAMBAH DATA -->
+        <div class="pb-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahDataModal">
+                + Tambah Data
+            </button>
+        </div>
     <main class="container bg-light mt-3">
         <!-- START DATA -->
         <div class="my-3 p-3 bg-body rounded shadow-sm">
@@ -27,129 +45,124 @@
                 </button>
             </div>
 
-            <!-- TABEL PRODUK -->
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Id User</th>
-                            <th>Id UMKM</th>
-                            <th>Nama User</th>
-                            <th>Email</th>
-                            <th>Level</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
+        <!-- TABEL PRODUK -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="text-center">
+                    <tr>
+                        <th>Id User</th>
+                        <th>Id UMKM</th>
+                        <th>Nama User</th>
+                        <th>Email</th>
+                        <th>Level</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($superadmin as $index => $superadmin)
+                    <tr class="text-center align-middle">
+                        <td>{{ $superadmin->id_user }}</td>
+                        <td>{{ $superadmin->id_umkm }}</td>
+                        <td>{{ $superadmin->nama_user }}</td>
+                        <td>{{ $superadmin->email }}</td>
+                        <td>{{ $superadmin->level }}</td>
+                        <td>{{ $superadmin->status}}</td>
+                        <td>
+                            <a href="{{ route('superadmin.edit', $superadmin->id_user) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('superadmin.delete', $superadmin->id_user) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                            </form>
+                        </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($superadmin as $index => $superadmin)
-                            <tr class="text-center align-middle">
-                                <td>{{ $superadmin->id_user }}</td>
-                                <td>{{ $superadmin->id_umkm }}</td>
-                                <td>{{ $superadmin->nama_user }}</td>
-                                <td>{{ $superadmin->email }}</td>
-                                <td>{{ $superadmin->level }}</td>
-                                <td>{{ $superadmin->status }}</td>
-                                <td>
-                                    <a href="{{ route('superadmin.edit', $superadmin->id_user) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ route('superadmin.delete', $superadmin->id_user) }}" method="POST"
-                                        style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                @endforeach
+                </tbody>
+            </table>
         </div>
-        <!-- AKHIR DATA -->
+    </div>
+    <!-- AKHIR DATA -->
 
-        <!-- Modal Tambah Data -->
-        <div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addDataModalLabel">Tambah Data Admin</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- START FORM -->
-                        <form id="addDataForm" action='{{ route('superadmin.store') }}' method='post'
-                            onsubmit="showSuccessModal(event)">
-                            @csrf
-                            <!-- ID User -->
-                            <div class="mb-3 row">
-                                <label for="id_user" class="col-sm-4 col-form-label">ID User</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" name='id_user' id="id_user" required>
-                                </div>
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addDataModalLabel">Tambah Data Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- START FORM --> 
+                    <form id="addDataForm" action='{{ route('superadmin.store') }}' method='post' onsubmit="showSuccessModal(event)">
+                        @csrf
+                        <!-- ID User -->
+                        <div class="mb-3 row">
+                            <label for="id_user" class="col-sm-4 col-form-label">ID User</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name='id_user' id="id_user" required>
                             </div>
+                        </div>
 
-                            <!-- ID UMKM -->
-                            <div class="mb-3 row">
-                                <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" name='id_umkm' id="id_umkm" required>
-                                </div>
+                        <!-- ID UMKM -->
+                        <div class="mb-3 row">
+                            <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name='id_umkm' id="id_umkm" required>
                             </div>
+                        </div>
 
-                            <!-- Nama User -->
-                            <div class="mb-3 row">
-                                <label for="nama_user" class="col-sm-4 col-form-label">Nama User</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name='nama_user' id="nama_user" required>
-                                </div>
+                        <!-- Nama User -->
+                        <div class="mb-3 row">
+                            <label for="nama_user" class="col-sm-4 col-form-label">Nama User</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name='nama_user' id="nama_user" required>
                             </div>
+                        </div>
 
-                            <!-- Email -->
-                            <div class="mb-3 row">
-                                <label for="email" class="col-sm-4 col-form-label">Email</label>
-                                <div class="col-sm-8">
-                                    <input type="email" class="form-control" name='email' id="email" required>
-                                </div>
+                        <!-- Email -->
+                        <div class="mb-3 row">
+                            <label for="email" class="col-sm-4 col-form-label">Email</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" name='email' id="email" required>
                             </div>
+                        </div>
 
-                            <!-- Level (Admin/Superadmin) -->
-                            <div class="mb-3 row">
-                                <label for="level" class="col-sm-4 col-form-label">Level</label>
-                                <div class="col-sm-8">
-                                    <select class="form-select" name="level" id="level" required>
-                                        <option value="admin">Pengelola</option>
-                                        <option value="superadmin">Superadmin</option>
-                                        <option value="superadmin">Pemilik</option>
-                                    </select>
-                                </div>
+                        <!-- Level (Admin/Superadmin) -->
+                        <div class="mb-3 row">
+                            <label for="level" class="col-sm-4 col-form-label">Level</label>
+                            <div class="col-sm-8">
+                                <select class="form-select" name="level" id="level" required>
+                                    <option value="admin">Pengelola</option>
+                                    <option value="superadmin">Superadmin</option>
+                                    <option value="superadmin">Pemilik</option>
+                                </select>
                             </div>
+                        </div>
 
-                            <!-- Status (Aktif/Tidak Aktif) -->
-                            <div class="mb-3 row">
-                                <label for="status" class="col-sm-4 col-form-label">Status</label>
-                                <div class="col-sm-8">
-                                    <select class="form-select" name="status" id="status" required>
-                                        <option value="aktif">Aktif</option>
-                                        <option value="tidak_aktif">Tidak Aktif</option>
-                                    </select>
-                                </div>
+                        <!-- Status (Aktif/Tidak Aktif) -->
+                        <div class="mb-3 row">
+                            <label for="status" class="col-sm-4 col-form-label">Status</label>
+                            <div class="col-sm-8">
+                                <select class="form-select" name="status" id="status" required>
+                                    <option value="aktif">Aktif</option>
+                                    <option value="tidak_aktif">Tidak Aktif</option>
+                                </select>
                             </div>
+                        </div>
 
-                            <!-- Submit Buttons -->
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-default me-2" data-bs-toggle="modal"
-                                    data-bs-target="#confirmCancelModal">BATAL</button>
-                                <button type="submit" class="btn btn-primary">SIMPAN</button>
-                            </div>
-                        </form>
-                        <!-- AKHIR FORM -->
-                    </div>
+                        <!-- Submit Buttons -->
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-default me-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">BATAL</button>
+                            <button type="submit" class="btn btn-primary">SIMPAN</button>
+                        </div>
+                    </form>
+                    <!-- AKHIR FORM -->
                 </div>
             </div>
         </div>
-        <!-- Akhir Modal Tambah Data -->
+    </div>
+    <!-- Akhir Modal Tambah Data -->
 
         <!-- Modal Konfirmasi Batal -->
         <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel"

@@ -28,6 +28,100 @@
                 </button>
             </div>
 
+        <!-- TABEL PRODUK -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="text-center">
+                    <tr>
+                        <th>NO</th>
+                        <th>UMKM</th>
+                        <th>Pemilik</th>
+                        <th>Alamat</th>
+                        <th>Nomor HP</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($umkms as $index => $umkm)
+                <tr>
+                    <td>{{ $index + 1}}</td>   
+                    <td>{{ $umkm->nama_umkm }}</td>
+                    <td>{{ $umkm->pemilik }}</td>
+                    <td>{{ $umkm->alamat_umkm }}</td>
+                    <td>{{ $umkm->no_hp }}</td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <a href="{{ route('umkm.edit', $umkm->id_umkm) }}" class="btn btn-warning btn-sm" data-bs-toggle="modal" method= "POST" data-bs-target="#editDataModal-{{$umkm->id_umkm}}" >Edit</a>
+                        @csrf 
+                        @method('PUT')
+                        
+                        <!-- Modal EDIT Data -->
+                        <div class="modal fade" id="editDataModal-{{$umkm->id_umkm}}" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="tambahDataModalLabel">Edit Data UMKM</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- FORM TAMBAH DATA -->
+                                        <form id="editDataForm" action="{{ route('umkm.update', $umkm->id_umkm) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            
+                                            <!-- Nama UMKM -->
+                                            <div class="mb-3 row">
+                                                <label for="nama_user" class="col-sm-4 col-form-label">Nama UMKM</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="nama_umkm" id="nama_umkm" value="{{ $umkm->nama_umkm }}" required>
+                                                </div>
+                                            </div>
+                                            <!-- Nama UMKM -->
+                                            <div class="mb-3 row">
+                                                <label for="nama_user" class="col-sm-4 col-form-label">Pemilik</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="pemilik" id="pemilik" value="{{ $umkm->pemilik }}" required>
+                                                </div>
+                                            </div>
+                                        
+                                            <!-- Alamat -->
+                                            <div class="mb-3 row">
+                                                <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="alamat" id="alamat" value="{{ $umkm->alamat_umkm }}" required>
+                                                </div>
+                                            </div>
+                                            <!-- NoHP -->
+                                            <div class="mb-3 row">
+                                                <label for="NoHP" class="col-sm-4 col-form-label">Nomor HP</label>
+                                                <div class="col-sm-8">
+                                                    <input type="tel" class="form-control" name="no_hp" id="no_hp" placeholder="Masukkan nomor HP" value="{{ $umkm->no_hp }}" required>
+                                                </div>
+                                            </div>
+                                            <!-- Submit Buttons -->
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-default me-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">BATAL</button>
+                                                <button type="submit" class="btn btn-primary">SIMPAN</button>
+                                            </div>
+                                        </form>
+                                        <!-- AKHIR FORM -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <form action="{{ route('umkm.destroy', $umkm->id_umkm) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Del</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- AKHIR DATA -->
             <!-- TABEL PRODUK -->
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
@@ -157,68 +251,65 @@
         </div>
         <!-- AKHIR DATA -->
 
-        <!-- Modal Tambah Data -->
-        <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data UMKM</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- FORM TAMBAH DATA -->
-                        <form id="addDataForm" action="{{ route('umkm.store') }}" method="POST">
-                            @csrf
-                            <!-- ID UMKM -->
-                            <div class="mb-3 row">
-                                <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" name='id_umkm' id="id_umkm" required>
-                                </div>
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data UMKM</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- FORM TAMBAH DATA -->
+                    <form id="addDataForm" action="{{ route('umkm.store') }}" method="POST">
+                        @csrf
+                        <!-- ID UMKM -->
+                        <div class="mb-3 row">
+                            <label for="id_umkm" class="col-sm-4 col-form-label">ID UMKM</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name='id_umkm' id="id_umkm" required>
                             </div>
-                            <!-- Nama UMKM -->
-                            <div class="mb-3 row">
-                                <label for="nama_user" class="col-sm-4 col-form-label">Nama UMKM</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nama_umkm" id="nama_umkm" required>
-                                </div>
+                        </div>
+                        <!-- Nama UMKM -->
+                        <div class="mb-3 row">
+                            <label for="nama_user" class="col-sm-4 col-form-label">Nama UMKM</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="nama_umkm" id="nama_umkm" required>
                             </div>
-                            <!-- Nama UMKM -->
-                            <div class="mb-3 row">
-                                <label for="nama_user" class="col-sm-4 col-form-label">Pemilik</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="pemilik" id="pemilik" required>
-                                </div>
+                        </div>
+                        <!-- Nama UMKM -->
+                        <div class="mb-3 row">
+                            <label for="nama_user" class="col-sm-4 col-form-label">Pemilik</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="pemilik" id="pemilik" required>
                             </div>
-
-                            <!-- Alamat -->
-                            <div class="mb-3 row">
-                                <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="alamat" id="alamat_umkm" required>
-                                </div>
+                        </div>
+                       
+                        <!-- Alamat -->
+                        <div class="mb-3 row">
+                            <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="alamat" id="alamat_umkm" required>
                             </div>
-                            <!-- NoHP -->
-                            <div class="mb-3 row">
-                                <label for="NoHP" class="col-sm-4 col-form-label">Nomor HP</label>
-                                <div class="col-sm-8">
-                                    <input type="tel" class="form-control" name="no_hp" id="no_hp"
-                                        placeholder="Masukkan nomor HP" required>
-                                </div>
+                        </div>
+                        <!-- NoHP -->
+                        <div class="mb-3 row">
+                            <label for="NoHP" class="col-sm-4 col-form-label">Nomor HP</label>
+                            <div class="col-sm-8">
+                                <input type="tel" class="form-control" name="no_hp" id="no_hp" placeholder="Masukkan nomor HP" required>
                             </div>
-                            <!-- Submit Buttons -->
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-default me-2" data-bs-toggle="modal"
-                                    data-bs-target="#confirmCancelModal">BATAL</button>
-                                <button type="submit" class="btn btn-primary">SIMPAN</button>
-                            </div>
-                        </form>
-                        <!-- AKHIR FORM -->
-                    </div>
+                        </div>
+                        <!-- Submit Buttons -->
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-default me-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">BATAL</button>
+                            <button type="submit" class="btn btn-primary">SIMPAN</button>
+                        </div>
+                    </form>
+                    <!-- AKHIR FORM -->
                 </div>
             </div>
         </div>
+    </div>
 
 
         <!-- Modal Konfirmasi Batal -->
