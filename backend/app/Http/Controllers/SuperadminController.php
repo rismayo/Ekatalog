@@ -10,20 +10,13 @@ class SuperadminController extends Controller
 {
     public function index(Request $request)
     {
-         $superadmin = Superadmin::all(); 
+         $superadmins = Superadmin::all(); 
         
          return view('superadmin.lihatsuperadmin', compact('superadmin'));
     }
 
      public function store(Request $request)
      {
-        error_log($request->id_user);
-        error_log($request->id_umkm);
-        error_log($request->nama_user);
-        error_log($request->email);
-        error_log($request->password);
-        error_log($request->level);
-        error_log($request->status);
         
         $request->validate([
             'id_user' => 'required|unique:ms_user,id_user',

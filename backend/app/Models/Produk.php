@@ -29,4 +29,12 @@ class Produk extends Model
     {
         return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
     }
+    public function umkm()
+    {
+        return $this->belongsTo(Umkm::class, 'id_umkm', 'id_umkm');
+    }
+    public function superadmin()
+    {
+        return $this->belongsTo(Superadmin::class, 'id_user', 'id_user');
+    }
 }

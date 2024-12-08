@@ -23,4 +23,9 @@ class Superadmin extends Model
         'status',
     ];
 
+    public function produk()
+    {
+        return $this->hasMany(Produk::class);
+    }
+
 }

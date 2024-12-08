@@ -29,9 +29,6 @@
                 <thead class="text-center">
                     <tr>
                         <th>NO</th>
-                        <th>Pemilik</th>
-                        <th>Kategori</th>
-                        <th>UMKM</th>
                         <th>Produk</th>
                         <th>Deskripsi</th>
                         <th>Status</th>
@@ -44,9 +41,6 @@
                 @foreach ($products as $index => $produk)
                 <tr class="text-center align-middle">
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $produk->id_user }}</td>
-                    <td>{{ $produk->kategori->id_kategori }}</td>
-                    <td>{{ $produk->id_umkm }}</td>
                     <td>{{ $produk->nama_produk }}</td>
                     <td>{{ $produk->deskripsi_produk }}</td>
                     <td>{{ $produk->status }}</td>
@@ -78,7 +72,7 @@
                                                             <label for="id_user" class="form-label">Pemilik</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control" id="id_user" name="id_user" value="{{ $produk->id_produk }}" required>
+                                                            <input type="text" class="form-control" id="id_user" name="id_user" value="{{ $produk->id_user }}" required>
                                                         </div>
                                                     </div>
                                                     
@@ -131,7 +125,10 @@
                                                             <label for="foto_produk" class="form-label">Foto Produk</label>
                                                         </div>
                                                         <div class="col-sm-9">
-                                                            <input type="file" class="form-control" name="foto_produk" id="foto_produk" accept="image/*" value="{{ $produk->foto_produk }}" required>
+                                                            <input type="file" class="form-control" name="foto_produk" id="foto_produk" accept="image/*">
+                                                                @if($produk->foto_produk)
+                                                                    <img src="{{ asset('storage/' . $produk->foto_produk) }}" width="100" />
+                                                                @endif
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
@@ -182,19 +179,46 @@
                         <div class="mb-3 row">
                             <label for="id_user" class="col-sm-4 col-form-label">Pemilik</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="id_user" id="id_user">
+                                <select class="form-control" name="id_user" id="id_user" required>
+                                    <option value="" disabled>Pilih Nama Pemilik</option>
+                                    @if($superadmin->isNotEmpty())
+                                        @foreach ($superadmin as $superadmin)
+                                            <option value="{{ $superadmin->id_user }}" {{ $produk->id_user == $superadmin->id_user ? 'selected' : '' }}>
+                                                {{ $superadmin->nama_user }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="id_kategori" class="col-sm-4 col-form-label">Kategori</label>
+                            <label for="id_kategori" class="col-sm-4 col-form-label">Nama Kategori</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="id_kategori" id="id_kategori">
+                                <select class="form-control" name="id_kategori" id="id_kategori" required>
+                                    <option value="" disabled>Pilih Nama Kategori</option>
+                                    @if($kategori->isNotEmpty())
+                                        @foreach ($kategori as $kategori)
+                                            <option value="{{ $kategori->id_kategori }}" {{ $produk->id_kategori == $kategori->id_kategori ? 'selected' : '' }}>
+                                                {{ $kategori->nama_kategori }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="id_umkm" class="col-sm-4 col-form-label">UMKM</label>
+                            <label for="id_umkm" class="col-sm-4 col-form-label">Nama UMKM</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="id_umkm" id="id_umkm">
+                                <select class="form-control" name="id_umkm" id="id_umkm" required>
+                                    <option value="" disabled>Pilih Nama UMKM</option>
+                                    @if($umkms->isNotEmpty())
+                                        @foreach ($umkms as $umkm)
+                                            <option value="{{ $umkm->id_umkm }}" {{ $produk->id_umkm == $umkm->id_umkm ? 'selected' : '' }}>
+                                                {{ $umkm->nama_umkm }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                         </div>
                         <div class="mb-3 row">
