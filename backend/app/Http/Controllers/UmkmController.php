@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use App\Models\Umkm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,18 +19,20 @@ class UmkmController extends Controller
          return view('umkm.lihatumkm', compact('umkms'));
     }
 
+    public function create()
+    {
+        // Ambil semua data UMKM
+        $umkms = Umkm::all();
+
+        // Kirim data UMKM ke view
+        return view('kategori.lihatkategori', compact('umkms'));
+    }
+
     // Store a new UMKM record
     public function store(Request $request)
     {
-
-            error_log($request->id_umkm);
-            error_log($request->nama_umkm);
-            error_log($request->pemilik);
-            error_log($request->alamat);
-            error_log($request->no_hp);
        
         $request->validate([
-            'id_umkm' => 'required|unique:ms_umkm,id_umkm',
             'nama_umkm' => 'required',
             'pemilik' => 'required',
             'alamat' => 'required',
@@ -39,7 +42,6 @@ class UmkmController extends Controller
         try {
             
             Umkm::create([
-                'id_umkm' => $request->id_umkm,
                 'nama_umkm' => $request->nama_umkm,
                 'pemilik' => $request->pemilik,
                 'alamat_umkm' => $request->alamat,
@@ -75,10 +77,11 @@ class UmkmController extends Controller
     }
 
     // Delete UMKM record
-    public function delete($id)
+    public function destroy($id)
     {
-        error_log('test');
-        $test = Umkm::where('id_umkm', $id)->delete();
+        $umkm = Umkm::findOrFail($id); // Cari data berdasarkan ID
+        $umkm->delete(); // Hapus data
         return redirect()->route('umkm.lihatumkm')->with('success', 'Data UMKM berhasil dihapus');
     }
 }
+

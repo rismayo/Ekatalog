@@ -24,4 +24,9 @@ class Produk extends Model
         'foto_produk',
         'status',
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
+    }
 }

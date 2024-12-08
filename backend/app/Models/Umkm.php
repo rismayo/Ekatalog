@@ -14,10 +14,17 @@ class Umkm extends Model
     protected $primaryKey = 'id_umkm';
 
     protected $fillable = [
-        'id_umkm',
         'nama_umkm',
         'pemilik',
         'alamat_umkm',
         'no_hp',
     ];
+    public function kategori()
+    {
+        return $this->hasMany(Kategori::class);
+    }
+    public function produk()
+    {
+        return $this->hasMany(Produk::class);
+    }
 }
