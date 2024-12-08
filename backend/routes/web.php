@@ -56,7 +56,7 @@ Route::get('/umkm/edit/{id}', [UmkmController::class, 'edit'])->name('umkm.edit'
 
 Route::put('/umkm/update/{id}', [UmkmController::class, 'update'])->name('umkm.update');
 
-Route::get('/umkm/delete/{id}', [UmkmController::class, 'delete'])->name('umkm.delete');
+Route::get('/umkm/delete/{id}', [UmkmController::class, 'delete'])->name('umkm.destroy');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'dashboard'])->name('login');
@@ -103,7 +103,11 @@ Route::post('/superadmin/lihatsuperadmin', [SuperadminController::class, 'store'
 Route::get('superadmin/edit/{id}', [SuperadminController::class, 'edit'])->name('superadmin.edit');
 
   // Update admin
-Route::post('superadmin/update/{id}', [SuperadminController::class, 'update'])->name('superadmin.update');
+Route::put('superadmin/update/{id}', [SuperadminController::class, 'update'])->name('superadmin.update');
 
   // Hapus admin
 Route::get('superadmin/delete/{id}', [SuperadminController::class, 'destroy'])->name('superadmin.delete');
+
+
+
+

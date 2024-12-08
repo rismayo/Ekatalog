@@ -22,7 +22,7 @@ class UmkmController extends Controller
     public function store(Request $request)
     {
 
-        error_log($request->id_umkm);
+            error_log($request->id_umkm);
             error_log($request->nama_umkm);
             error_log($request->pemilik);
             error_log($request->alamat);
