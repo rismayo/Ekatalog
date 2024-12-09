@@ -10,7 +10,7 @@ class SuperadminController extends Controller
 {
     public function index(Request $request)
     {
-         $superadmins = Superadmin::all(); 
+         $superadmin = Superadmin::all(); 
         
          return view('superadmin.lihatsuperadmin', compact('superadmin'));
     }

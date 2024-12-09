@@ -66,6 +66,19 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [SesiController::class, 'login']);
 });
 
+// Rute yang memerlukan autentikasi (hanya untuk pengguna yang sudah login)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/superadmin/dashboard', function () {
+        return view('superadmin.dashboard');
+    })->name('superadmin.dashboard');
+
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+
+    Route::get('/superadmin/logout', [SesiController::class, 'logout'])->name('logout');
+});
+
 Route::get('/kategori/lihatkategori', function () {
     return view('kategori.lihatkategori'); 
 });
@@ -81,15 +94,7 @@ Route::delete('/kategori/delete/{id}', [KategoriController::class, 'delete'])->n
 
 Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', function () {
-        return redirect('/superadmin/dashboard');
-    });
 
-    Route::get('/superadmin', [AdminController::class, 'dashboard']); 
-
-    Route::get('/superadmin/logout', [SesiController::class, 'logout']);
-});
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });

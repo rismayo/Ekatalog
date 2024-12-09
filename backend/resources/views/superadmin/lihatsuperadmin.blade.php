@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($superadmins as $index => $superadmin)
+                @foreach ($superadmin as $index => $superadmin)
                     <tr class="text-center align-middle">
                         <td>{{ $index + 1}}</td> 
                         <td>{{ $superadmin->id_umkm }}</td>

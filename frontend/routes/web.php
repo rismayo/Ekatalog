@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\SesiController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +36,5 @@ Route::get('/profile', function () {
 Route::get('/hubungi-kami', function () {
     return view('hubungi-kami');
 });
+Route::get('/', [ProdukController::class, 'welcome'])->name('welcome');
+Route::get('/', [KategoriController::class, 'welcome'])->name('welcome');

@@ -9,47 +9,50 @@ class SesiController extends Controller
 {
     function dashboard()
     {
+        if (Auth::check()) {
+            // Pengguna sudah login, arahkan ke dashboard yang sesuai
+            if (Auth::user()->level == 'Superadmin') {
+                return redirect()->route('superadmin.dashboard');
+            } elseif (Auth::user()->level == 'Admin') {
+                return redirect()->route('admin.dashboard');
+            }
+        }
         return view('login.login');
     }
-    function login(Request $request){
+    public function login(Request $request)
+    {
+        // Validasi input
         $request->validate([
-            'email'=>'required',
-            'password'=>'required'
-        ],[
-            'email.required'=>'email wajib diisi',
-            'password.required'=>'password wajib diisi'
+            'email' => 'required',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Email wajib diisi',
+            'password.required' => 'Password wajib diisi',
         ]);
 
-        $infologin = [
-            'email'=>$request->email,
-            'password'=>$request->password
-        ];
-
-        if(Auth::attempt($infologin)){
-            return redirect('/superadmin/dashboard');
-        }else{
-            return redirect('/login')->withErrors('email dan password yang dimasukkan tidak sesuai')->withInput();
-
-        if (Auth::attempt($infologin)) {
-            // Cek level pengguna setelah login
-            if (Auth::user()->level == 'superadmin') {
-                return redirect('/superadmin/dashboard');
-            } elseif (Auth::user()->level == 'admin') {
-                return redirect('/admin/dashboard');
+        // Cek kredensial login
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            // Redirect sesuai level pengguna
+            if (Auth::user()->level == 'Superadmin') {
+                return redirect()->route('superadmin.dashboard');
+            } elseif (Auth::user()->level == 'Admin') {
+                return redirect()->route('admin.dashboard');
+            } else {
+                Auth::logout(); // Logout jika level tidak dikenali
+                return redirect('/login')->withErrors('Akses ditolak. Level tidak dikenali.');
             }
         } else {
-            // Jika login gagal, kembali ke halaman login dengan pesan error
-            return redirect('/login')->withErrors('Email dan password yang dimasukkan tidak sesuai')->withInput();
+            // Jika kredensial salah
+            return redirect('/login')->withErrors('Email atau password yang dimasukkan tidak sesuai.')->withInput();
         }
     }
-
     function logout()
     {
         Auth::logout();
         request()->session()->invalidate(); 
         request()->session()->regenerateToken(); 
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
-}
 }
