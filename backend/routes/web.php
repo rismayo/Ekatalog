@@ -39,7 +39,7 @@ Route::get('/produk/edit/{id}', [ProdukController::class, 'edit'])->name('produk
 
 Route::put('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
 
-Route::get('/produk/delete/{id}', [ProdukController::class, 'delete'])->name('produk.delete');
+Route::get('/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
 Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
 
