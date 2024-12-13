@@ -133,9 +133,8 @@
                             <label for="level" class="col-sm-4 col-form-label">Level</label>
                             <div class="col-sm-8">
                                 <select class="form-select" name="level" id="level" required>
-                                    <option value="admin">Pengelola</option>
+                                    <option value="admin">Admin</option>
                                     <option value="superadmin">Superadmin</option>
-                                    <option value="superadmin">Pemilik</option>
                                 </select>
                             </div>
                         </div>

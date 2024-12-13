@@ -96,7 +96,7 @@ class ProdukController extends Controller
         ]);
 
         $product = Produk::findOrFail($id);
-        $product -> id_user = $request->input('id_user');
+        $product -> id_user = $request->input('id_user_edit');
         $product -> id_kategori = $request->input('id_kategori');
         $product -> id_umkm = $request->input('id_umkm');
         $product -> nama_produk = $request->input('nama_produk');
